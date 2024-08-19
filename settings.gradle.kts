@@ -15,4 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Derectory"
 include(":app")
- 
+include(":domain")
+include(":data")
