@@ -24,6 +24,7 @@ fun AddContactScreen(navController: NavController, mainViewModel: MainViewModel)
     Column {
 
         val contactName by mainViewModel.contactName.collectAsState()
+        val contactSecondName by mainViewModel.contactSecondName.collectAsState()
         val contactPhoneNumber by mainViewModel.contactPhoneNumber.collectAsState()
         Row(
             modifier = Modifier
@@ -44,11 +45,19 @@ fun AddContactScreen(navController: NavController, mainViewModel: MainViewModel)
             painter = painterResource(id = R.drawable.ic_launcher_background),
             contentDescription = null
         )
-        TextField(value = contactName, onValueChange = mainViewModel::onNameChange)
-        TextField(value = "SecondName", onValueChange = {})
+        TextField(
+            value = contactName,
+            onValueChange = mainViewModel::onNameChange,
+            placeholder = { Text(text = "Фамилия") })
+        TextField(
+            value = contactSecondName,
+            onValueChange = mainViewModel::onSecondNameChange,
+            placeholder = { Text(text = "Имя") }
+        )
         TextField(
             value = contactPhoneNumber,
-            onValueChange = mainViewModel::onPhoneNumberChange
+            onValueChange = mainViewModel::onPhoneNumberChange,
+            placeholder = { Text(text = "Номер телефона") }
         )
     }
 

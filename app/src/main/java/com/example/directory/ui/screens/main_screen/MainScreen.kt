@@ -75,14 +75,7 @@ fun MainScreen(
             )
         )
         LazyColumn {
-            items(contacts) { contact ->
-                // Отображение каждого контакта
-                Text(
-                    text = "${contact.name}: ${contact.phoneNumber}",
-                    modifier = Modifier
-                        .padding(16.dp)
-                )
-            }
+
         }
     }
 }
