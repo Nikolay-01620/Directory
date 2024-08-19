@@ -13,7 +13,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Derectory"
+rootProject.name = "Directory"
 include(":app")
 include(":domain")
 include(":data")

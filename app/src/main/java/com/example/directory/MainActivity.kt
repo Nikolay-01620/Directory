@@ -1,4 +1,4 @@
-package com.example.derectory
+package com.example.directory
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -8,9 +8,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.example.derectory.ui.nav_host.NavHost
-import com.example.derectory.ui.screens.main_screen.MainViewModel
-import com.example.derectory.ui.theme.DerectoryTheme
+import com.example.directory.ui.nav_host.NavHost
+import com.example.directory.ui.screens.main_screen.MainViewModel
+import com.example.directory.ui.theme.DerectoryTheme
 
 class MainActivity : ComponentActivity() {
 

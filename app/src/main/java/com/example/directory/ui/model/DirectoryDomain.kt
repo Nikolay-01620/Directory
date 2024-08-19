@@ -1,4 +1,4 @@
-package com.example.derectory.ui.model
+package com.example.directory.ui.model
 
 data class Directory(
     val id: Int = 0,

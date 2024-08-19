@@ -1,4 +1,4 @@
-package com.example.derectory
+package com.example.directory
 
 import org.junit.Test
 

@@ -1,13 +1,13 @@
-package com.example.derectory.ui.nav_host
+package com.example.directory.ui.nav_host
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.derectory.ui.screens.main_screen.MainScreen
+import com.example.directory.ui.screens.main_screen.MainScreen
 import androidx.navigation.compose.NavHost
-import com.example.derectory.ui.screens.add_contact_screen.AddContactScreen
-import com.example.derectory.ui.screens.main_screen.MainViewModel
+import com.example.directory.ui.screens.add_contact_screen.AddContactScreen
+import com.example.directory.ui.screens.main_screen.MainViewModel
 
 @Composable
 fun NavHost(

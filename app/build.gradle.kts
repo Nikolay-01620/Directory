@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.derectory"
+    namespace = "com.example.directory"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.derectory"
+        applicationId = "com.example.directory"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

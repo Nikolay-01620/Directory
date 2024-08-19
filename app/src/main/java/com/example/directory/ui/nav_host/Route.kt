@@ -1,4 +1,4 @@
-package com.example.derectory.ui.nav_host
+package com.example.directory.ui.nav_host
 
 sealed class Route(
     val route: String

@@ -1,4 +1,4 @@
-package com.example.derectory.ui.screens.main_screen
+package com.example.directory.ui.screens.main_screen
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -26,7 +26,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.derectory.ui.nav_host.Route
+import com.example.directory.ui.nav_host.Route
 
 @Composable
 fun MainScreen(
