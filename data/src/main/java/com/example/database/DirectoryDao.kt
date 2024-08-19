@@ -9,17 +9,6 @@ import androidx.room.Delete
 @Dao
 interface DirectoryDao {
     @Insert
-    suspend fun insert(directory: Directory)
+    suspend fun insert(): DirectoryData
 
-    @Update
-    suspend fun update(directory: Directory)
-
-    @Delete
-    suspend fun delete(directory: Directory)
-
-    @Query("SELECT * FROM directory")
-    suspend fun getAllContacts(): List<Directory>
-
-    @Query("SELECT * FROM directory WHERE id = :id")
-    suspend fun getContactById(id: Int): Directory?
 }

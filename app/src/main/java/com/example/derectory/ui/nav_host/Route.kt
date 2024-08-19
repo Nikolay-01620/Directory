@@ -4,6 +4,6 @@ sealed class Route(
     val route: String
 ) {
     data object MainScreen : Route(route = "mainScreen")
-    data object DetailsScreen : Route(route = "detailsScreen")
+    data object AddContactScreen : Route(route = "addContactScreen")
     data object SendMessageScreen : Route(route = "sendMessageScreen")
 }

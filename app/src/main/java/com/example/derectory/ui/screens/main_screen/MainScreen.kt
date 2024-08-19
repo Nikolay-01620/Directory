@@ -1,4 +1,4 @@
-package com.example.derectory.ui.screens
+package com.example.derectory.ui.screens.main_screen
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -26,6 +26,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.derectory.ui.nav_host.Route
 
 @Composable
 fun MainScreen(
@@ -37,16 +38,18 @@ fun MainScreen(
     val focusManager = LocalFocusManager.current
 
     Column {
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
-            horizontalArrangement = Arrangement.SpaceBetween) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
             Text(text = "Contacts")
             Spacer(modifier = Modifier.padding(10.dp))
             Icon(
                 imageVector = Icons.Filled.Add,
                 contentDescription = null,
-                Modifier.clickable { })
+                Modifier.clickable { navController.navigate(route = Route.AddContactScreen.route) })
         }
         TextField(
             value = searchQuery,

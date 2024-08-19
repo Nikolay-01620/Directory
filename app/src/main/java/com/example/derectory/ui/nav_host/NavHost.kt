@@ -4,13 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.derectory.ui.screens.MainScreen
-import androidx.navigation.NavType
+import com.example.derectory.ui.screens.main_screen.MainScreen
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
-import com.example.derectory.ui.screens.MainViewModel
+import com.example.derectory.ui.screens.add_contact_screen.AddContactScreen
+import com.example.derectory.ui.screens.main_screen.MainViewModel
 
 @Composable
 fun NavHost(
@@ -22,6 +19,9 @@ fun NavHost(
     ) {
         composable(Route.MainScreen.route) {
             MainScreen(navController = navController, mainViewModel)
+        }
+        composable(Route.AddContactScreen.route) {
+            AddContactScreen(navController = navController)
         }
     }
 }
