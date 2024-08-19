@@ -11,33 +11,37 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(private val repository: DirectoryRepository) : ViewModel() {
 
-    private val _contacts = MutableStateFlow<List<DirectoryDomain>>(emptyList())
-    val contacts: StateFlow<List<DirectoryDomain>> = _contacts.asStateFlow()
+    private val _searchContacts = MutableStateFlow<List<DirectoryDomain>>(emptyList())
+    val searchContacts: StateFlow<List<DirectoryDomain>> = _searchContacts.asStateFlow()
 
-    private val _contactName = MutableStateFlow("")
-    val contactName: StateFlow<String> = _contactName.asStateFlow()
+    private val _name = MutableStateFlow("")
+    val name: StateFlow<String> = _name.asStateFlow()
 
-    private val _contactSecondName = MutableStateFlow("")
-    val contactSecondName: StateFlow<String> = _contactSecondName.asStateFlow()
+    private val _secondName = MutableStateFlow("")
+    val secondName: StateFlow<String> = _secondName.asStateFlow()
 
-    private val _contactPhoneNumber = MutableStateFlow("")
-    val contactPhoneNumber: StateFlow<String> = _contactPhoneNumber.asStateFlow()
+    private val _phoneNumber = MutableStateFlow("")
+    val phoneNumber: StateFlow<String> = _phoneNumber.asStateFlow()
+
+    init {
+        loadContacts()
+    }
 
 
     fun onNameChange(newName: String) {
-        _contactName.value = newName
+        _name.value = newName
     }
 
     fun onSecondNameChange(newSecondName: String) {
-        _contactSecondName.value = newSecondName
+        _secondName.value = newSecondName
     }
 
     fun onPhoneNumberChange(newPhoneNumber: String) {
-        _contactPhoneNumber.value = newPhoneNumber
+        _phoneNumber.value = newPhoneNumber
     }
 
     fun onValueChange(newValue: String) {
-        _contactName.value = newValue
+        _name.value = newValue
     }
 
 
@@ -56,7 +60,7 @@ class MainViewModel(private val repository: DirectoryRepository) : ViewModel() {
         viewModelScope.launch {
             val contacts =
                 repository.getAllContacts() // Вы должны реализовать этот метод в репозитории
-            _contacts.value = contacts
+            _searchContacts.value = contacts
         }
     }
 }
