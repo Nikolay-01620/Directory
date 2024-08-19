@@ -39,7 +39,7 @@ fun MainScreen(
     var searchQuery by remember { mutableStateOf("") }
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
-    val contacts by mainViewModel.contacts.collectAsState()
+    val contacts by mainViewModel.searchContacts.collectAsState()
 
     Column {
         Row(
