@@ -23,9 +23,9 @@ import com.example.directory.ui.screens.main_screen.MainViewModel
 fun AddContactScreen(navController: NavController, mainViewModel: MainViewModel) {
     Column {
 
-        val contactName by mainViewModel.contactName.collectAsState()
-        val contactSecondName by mainViewModel.contactSecondName.collectAsState()
-        val contactPhoneNumber by mainViewModel.contactPhoneNumber.collectAsState()
+        val contactName by mainViewModel.name.collectAsState()
+        val contactSecondName by mainViewModel.secondName.collectAsState()
+        val contactPhoneNumber by mainViewModel.phoneNumber.collectAsState()
         Row(
             modifier = Modifier
                 .fillMaxWidth()
