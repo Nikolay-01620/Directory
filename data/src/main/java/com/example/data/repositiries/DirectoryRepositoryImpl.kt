@@ -1,6 +1,6 @@
-package com.example.data.model
+package com.example.data.repositiries
 
-import com.example.database.DirectoryDao
+import com.example.data.model.DirectoryDao
 import com.example.domain.model.DirectoryDomain
 import com.example.domain.repositories.DirectoryRepository
 import com.example.utils.toDomain

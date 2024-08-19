@@ -10,7 +10,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.example.directory.ui.nav_host.NavHost
 import com.example.directory.ui.screens.main_screen.MainViewModel
-import com.example.directory.ui.theme.DerectoryTheme
+import com.example.directory.ui.theme.DirectoryTheme
 
 class MainActivity : ComponentActivity() {
 
@@ -19,7 +19,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            DerectoryTheme {
+            DirectoryTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
