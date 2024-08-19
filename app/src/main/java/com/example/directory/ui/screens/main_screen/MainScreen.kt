@@ -75,7 +75,17 @@ fun MainScreen(
             )
         )
         LazyColumn {
-
+            items(contacts) { contact ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                ) {
+                    Text(text = contact.name)
+                    Spacer(modifier = Modifier.weight(1f))
+                    Text(text = contact.phoneNumber)
+                }
+            }
         }
     }
 }

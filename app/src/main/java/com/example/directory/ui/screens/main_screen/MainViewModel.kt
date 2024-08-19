@@ -43,7 +43,16 @@ class MainViewModel(private val repository: DirectoryRepository) : ViewModel() {
 
     fun addContact() {
         viewModelScope.launch {
-
+            val contact = DirectoryDomain(
+                name = _contactName.value,
+                phoneNumber = _contactPhoneNumber.value
+            )
+            repository.insertContact(contact)
+            // Очищаем поля после добавления
+            _contactName.value = ""
+            _contactSecondName.value = ""
+            _contactPhoneNumber.value = ""
+            // Обновляем список контактов
         }
     }
 }
