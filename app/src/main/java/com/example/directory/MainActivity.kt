@@ -11,10 +11,11 @@ import androidx.compose.ui.Modifier
 import com.example.directory.ui.nav_host.NavHost
 import com.example.directory.ui.screens.main_screen.MainViewModel
 import com.example.directory.ui.theme.DirectoryTheme
+import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
 
-    private val mainViewModel: MainViewModel by viewModels()
+    private val mainViewModel: MainViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
