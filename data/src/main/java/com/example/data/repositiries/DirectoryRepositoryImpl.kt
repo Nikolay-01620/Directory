@@ -7,10 +7,17 @@ import com.example.utils.toDomain
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+
 class DirectoryRepositoryImpl(private val directoryDao: DirectoryDao) : DirectoryRepository {
     override suspend fun insertContact(directoryDomain: DirectoryDomain) {
         return withContext(Dispatchers.IO) {
             directoryDao.insert(directoryDomain.toDomain())
+        }
+    }
+
+    override suspend fun getAllContacts(): List<DirectoryDomain> {
+        return withContext(Dispatchers.IO) {
+            directoryDao.getAllContacts().map { it.toDomain() }
         }
     }
 }

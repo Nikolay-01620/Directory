@@ -48,11 +48,11 @@ fun AddContactScreen(navController: NavController, mainViewModel: MainViewModel)
         TextField(
             value = contactName,
             onValueChange = mainViewModel::onNameChange,
-            placeholder = { Text(text = "Фамилия") })
+            placeholder = { Text(text = "Имя") })
         TextField(
             value = contactSecondName,
             onValueChange = mainViewModel::onSecondNameChange,
-            placeholder = { Text(text = "Имя") }
+            placeholder = { Text(text = "Фамилия") }
         )
         TextField(
             value = contactPhoneNumber,

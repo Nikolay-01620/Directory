@@ -4,5 +4,6 @@ import com.example.domain.model.DirectoryDomain
 
 interface DirectoryRepository {
     suspend fun insertContact(directoryDomain: DirectoryDomain)
+    suspend fun getAllContacts(): List<DirectoryDomain>
 
 }

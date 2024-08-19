@@ -29,6 +29,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.directory.ui.nav_host.Route
+import com.example.domain.model.DirectoryDomain
 
 @Composable
 fun MainScreen(
@@ -76,16 +77,21 @@ fun MainScreen(
         )
         LazyColumn {
             items(contacts) { contact ->
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp)
-                ) {
-                    Text(text = contact.name)
-                    Spacer(modifier = Modifier.weight(1f))
-                    Text(text = contact.phoneNumber)
-                }
+                ContactItem(contact)
             }
         }
+    }
+}
+
+@Composable
+fun ContactItem(contact: DirectoryDomain) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
+        Text(text = contact.name)
+        Spacer(modifier = Modifier.weight(1f))
+        Text(text = contact.phoneNumber)
     }
 }

@@ -6,3 +6,7 @@ import com.example.domain.model.DirectoryDomain
 fun DirectoryDomain.toDomain() = DirectoryData(
     id = id, name = name, phoneNumber = phoneNumber
 )
+
+fun DirectoryData.toDomain() = DirectoryDomain(
+    id = id, name = name, phoneNumber = phoneNumber
+)
