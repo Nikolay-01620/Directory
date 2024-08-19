@@ -8,9 +8,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class DirectoryRepositoryImpl(private val directoryDao: DirectoryDao) : DirectoryRepository {
-    override suspend fun insertContact(): DirectoryDomain {
+    override suspend fun insertContact(directoryDomain: DirectoryDomain) {
         return withContext(Dispatchers.IO) {
-            directoryDao.insert().toDomain()
+            directoryDao.insert(directoryDomain.toDomain())
         }
     }
 }

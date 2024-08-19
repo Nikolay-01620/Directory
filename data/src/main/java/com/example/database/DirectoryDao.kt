@@ -9,6 +9,6 @@ import androidx.room.Delete
 @Dao
 interface DirectoryDao {
     @Insert
-    suspend fun insert(): DirectoryData
+    suspend fun insert(directory: DirectoryData)
 
 }
