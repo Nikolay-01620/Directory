@@ -1,8 +1,7 @@
 package com.example.data.di
 
-import com.example.data.model.AppDatabase
-import com.example.data.model.DatabaseProvider
-import com.example.data.model.DirectoryDao
+import com.example.data.model.database.AppDatabase
+import com.example.data.model.database.DatabaseProvider
 import com.example.data.repositiries.DirectoryRepositoryImpl
 import com.example.domain.repositories.DirectoryRepository
 import org.koin.dsl.module

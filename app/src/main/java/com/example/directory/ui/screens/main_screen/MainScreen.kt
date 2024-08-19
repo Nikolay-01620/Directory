@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -16,6 +17,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,6 +38,7 @@ fun MainScreen(
     var searchQuery by remember { mutableStateOf("") }
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
+    val contacts by mainViewModel.contacts.collectAsState()
 
     Column {
         Row(
@@ -71,8 +74,15 @@ fun MainScreen(
                 }
             )
         )
-        LazyColumn() {
-
+        LazyColumn {
+            items(contacts) { contact ->
+                // Отображение каждого контакта
+                Text(
+                    text = "${contact.name}: ${contact.phoneNumber}",
+                    modifier = Modifier
+                        .padding(16.dp)
+                )
+            }
         }
     }
 }

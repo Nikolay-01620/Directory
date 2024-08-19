@@ -1,4 +1,6 @@
-package com.example.directory.ui.screens.add_contact_screen
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -15,11 +17,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.directory.R
+import com.example.directory.ui.screens.main_screen.MainViewModel
 
 @Composable
-fun AddContactScreen(navController: NavController) {
+fun AddContactScreen(navController: NavController, mainViewModel: MainViewModel) {
     Column {
 
+        val contactName by mainViewModel.contactName.collectAsState()
+        val contactPhoneNumber by mainViewModel.contactPhoneNumber.collectAsState()
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -30,16 +35,21 @@ fun AddContactScreen(navController: NavController) {
         ) {
             Text(text = "Отменить", Modifier.clickable { navController.popBackStack() })
             Text(text = "Контакт")
-            Text(text = "Готово", Modifier.clickable { })
+            Text(text = "Готово", Modifier.clickable {
+                mainViewModel.addContact()
+                navController.popBackStack()
+            })
         }
         Image(
             painter = painterResource(id = R.drawable.ic_launcher_background),
             contentDescription = null
         )
-        Text(text = "", Modifier.clickable { })
-        TextField(value = "Имя", onValueChange = {})
-        TextField(value = "Фамилия", onValueChange = {})
-        TextField(value = "Добавить телефон", onValueChange = {})
+        TextField(value = contactName, onValueChange = mainViewModel::onNameChange)
+        TextField(value = "SecondName", onValueChange = {})
+        TextField(
+            value = contactPhoneNumber,
+            onValueChange = mainViewModel::onPhoneNumberChange
+        )
     }
 
 }

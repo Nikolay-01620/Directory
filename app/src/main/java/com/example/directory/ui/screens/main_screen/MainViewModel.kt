@@ -14,17 +14,41 @@ class MainViewModel(private val repository: DirectoryRepository) : ViewModel() {
     private val _contacts = MutableStateFlow<List<DirectoryDomain>>(emptyList())
     val contacts: StateFlow<List<DirectoryDomain>> = _contacts.asStateFlow()
 
-    private val _contacts1 = MutableStateFlow("")
-    val contacts1: StateFlow<String> = _contacts1.asStateFlow()
+    private val _contactName = MutableStateFlow("")
+    val contactName: StateFlow<String> = _contactName.asStateFlow()
+
+    private val _contactPhoneNumber = MutableStateFlow("")
+    val contactPhoneNumber: StateFlow<String> = _contactPhoneNumber.asStateFlow()
 
 
-    fun onValueChange(newValue: String) {
-        _contacts1.value = newValue
+    fun onNameChange(newName: String) {
+        _contactName.value = newName
     }
+
+    fun onPhoneNumberChange(newPhoneNumber: String) {
+        _contactPhoneNumber.value = newPhoneNumber
+    }
+    fun onValueChange(newValue: String) {
+        _contactName.value = newValue
+    }
+
 
     fun addContact() {
         viewModelScope.launch {
+            val name = _contactName.value
+            val phoneNumber = _contactPhoneNumber.value
 
+            if (name.isNotBlank() && phoneNumber.isNotBlank()) {
+                // Создайте объект Domain модели
+                val newContact = DirectoryDomain(name = name, phoneNumber = phoneNumber)
+
+                // Сохраните в репозиторий
+                repository.insertContact(newContact)
+
+                // Очистите поля после добавления
+                _contactName.value = ""
+                _contactPhoneNumber.value = ""
+            }
         }
     }
 }
