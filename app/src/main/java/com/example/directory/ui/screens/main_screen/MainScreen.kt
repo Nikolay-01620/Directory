@@ -81,7 +81,6 @@ fun MainScreen(
                     contact,
                     onClick = {
                         navController.navigate(route = Route.DetailsScreen.route)
-                        navController.popBackStack()
                     },
                 )
             }
