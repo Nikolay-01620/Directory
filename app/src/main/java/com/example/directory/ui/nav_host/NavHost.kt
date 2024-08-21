@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.directory.ui.screens.main_screen.MainScreen
 import androidx.navigation.compose.NavHost
+import com.example.directory.ui.screens.details_screen.DetailsScreen
 import com.example.directory.ui.screens.main_screen.MainViewModel
 
 @Composable
@@ -22,6 +23,9 @@ fun NavHost(
         }
         composable(Route.AddContactScreen.route) {
             AddContactScreen(navController = navController, mainViewModel = mainViewModel)
+        }
+        composable(Route.DetailsScreen.route) {
+            DetailsScreen()
         }
     }
 }

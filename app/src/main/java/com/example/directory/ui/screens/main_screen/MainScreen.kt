@@ -77,18 +77,25 @@ fun MainScreen(
         )
         LazyColumn {
             items(contacts) { contact ->
-                ContactItem(contact)
+                ContactItem(
+                    contact,
+                    onClick = {
+                        navController.navigate(route = Route.DetailsScreen.route)
+                        navController.popBackStack()
+                    },
+                )
             }
         }
     }
 }
 
 @Composable
-fun ContactItem(contact: DirectoryDomain) {
+fun ContactItem(contact: DirectoryDomain, onClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
+            .clickable { onClick() }
     ) {
         Text(text = contact.name)
         Spacer(modifier = Modifier.weight(1f))
