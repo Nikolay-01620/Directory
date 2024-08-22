@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -65,6 +66,12 @@ fun EditScreen(editViewModel: EditViewModel, navController: NavController, conta
             onValueChange = editViewModel::onPhoneNumberChange,
             placeholder = { Text(text = "Номер телефона") }
         )
+        Button(onClick = {
+            editViewModel.deleteContact(contactId)
+            navController.popBackStack()
+        }) {
+            Text(text = "Удалить контакт")
+        }
     }
 
 }

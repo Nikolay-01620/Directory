@@ -11,8 +11,18 @@ import kotlinx.coroutines.withContext
 
 class DirectoryRepositoryImpl(private val directoryDao: DirectoryDao) : DirectoryRepository {
     override suspend fun insertContact(directoryDomain: DirectoryDomain) {
-        return withContext(Dispatchers.IO) {
+        withContext(Dispatchers.IO) {
             directoryDao.insert(directoryDomain.toData())
+        }
+    }
+
+    override suspend fun deleteContact(contactId: Int) {
+        directoryDao.delete(contactId)
+    }
+
+    override suspend fun updateContact(directoryDomain: DirectoryDomain) {
+        withContext(Dispatchers.IO) {
+            directoryDao.update(directoryDomain.toData())
         }
     }
 
@@ -25,12 +35,6 @@ class DirectoryRepositoryImpl(private val directoryDao: DirectoryDao) : Director
     override suspend fun getContactById(contactId: Int): DirectoryDomain? {
         return withContext(Dispatchers.IO) {
             directoryDao.getContactById(contactId)?.toDomain()
-        }
-    }
-
-    override suspend fun updateContact(directoryDomain: DirectoryDomain) {
-        return withContext(Dispatchers.IO) {
-            directoryDao.update(directoryDomain.toData())
         }
     }
 }

@@ -46,6 +46,12 @@ class EditViewModel(private val directoryRepository: DirectoryRepository) : View
         }
     }
 
+    fun deleteContact(contactId: Int) {
+        viewModelScope.launch {
+            directoryRepository.deleteContact(contactId)
+        }
+    }
+
     fun loadContact(contactId: Int) {
         viewModelScope.launch {
             val contact = directoryRepository.getContactById(contactId)
