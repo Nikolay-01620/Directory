@@ -25,7 +25,7 @@ class MainViewModel(private val directoryRepository: DirectoryRepository) : View
         _onValueSearchChange.value = newValue
     }
 
-    private fun loadContacts() {
+    fun loadContacts() {
         viewModelScope.launch {
             val contacts =
                 directoryRepository.getAllContacts() // Вы должны реализовать этот метод в репозитории
