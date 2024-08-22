@@ -57,9 +57,7 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
                 photoUri = ""
             )
             directoryRepository.insertContact(newContact)
-            _name.value = ""
-            _secondName.value = ""
-            _phoneNumber.value = ""
+            clearFields()
         }
     }
 
