@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -26,6 +27,7 @@ fun AddContactScreen(navController: NavController, addContactViewModel: AddConta
         val name by addContactViewModel.name.collectAsState()
         val secondName by addContactViewModel.secondName.collectAsState()
         val phoneNumber by addContactViewModel.phoneNumber.collectAsState()
+        val isButtonEnabled by addContactViewModel.isButtonEnabled.collectAsState()
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -36,10 +38,16 @@ fun AddContactScreen(navController: NavController, addContactViewModel: AddConta
         ) {
             Text(text = "Отменить", Modifier.clickable { navController.popBackStack() })
             Text(text = "Контакт")
-            Text(text = "Готово", Modifier.clickable {
-                addContactViewModel.addContact()
-                navController.popBackStack()
-            })
+            Button(
+                onClick = {
+                    addContactViewModel.addContact()
+                    navController.popBackStack()
+                },
+                enabled = isButtonEnabled, // Управление активностью кнопки
+                modifier = Modifier.padding(start = 16.dp)
+            ) {
+                Text(text = "Готово")
+            }
         }
         Image(
             painter = painterResource(id = R.drawable.ic_launcher_background),

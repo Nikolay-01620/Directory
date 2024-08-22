@@ -5,8 +5,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.domain.model.DirectoryDomain
 import com.example.domain.repositories.DirectoryRepository
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class AddContactViewModel(private val directoryRepository: DirectoryRepository) : ViewModel() {
@@ -19,6 +22,14 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
 
     private val _phoneNumber = MutableStateFlow("")
     val phoneNumber: StateFlow<String> = _phoneNumber.asStateFlow()
+
+    val isButtonEnabled: StateFlow<Boolean> = combine(
+        _name,
+        _secondName,
+        _phoneNumber
+    ) { name, secondName, phoneNumber ->
+        name.isNotBlank() || secondName.isNotBlank() || phoneNumber.isNotBlank()
+    }.stateIn(viewModelScope, SharingStarted.Lazily, false)
 
 
     fun onNameChange(newName: String) {
