@@ -16,11 +16,6 @@ class MainViewModel(private val directoryRepository: DirectoryRepository) : View
     private val _contacts = MutableStateFlow<List<DirectoryDomain>>(emptyList())
     val contacts: StateFlow<List<DirectoryDomain>> = _contacts.asStateFlow()
 
-
-    init {
-        loadContacts()
-    }
-
     fun onValueSearchChange(newValue: String) {
         _onValueSearchChange.value = newValue
     }

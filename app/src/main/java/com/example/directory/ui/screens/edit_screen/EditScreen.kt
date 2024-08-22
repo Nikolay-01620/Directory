@@ -42,7 +42,7 @@ fun EditScreen(editViewModel: EditViewModel, navController: NavController, conta
             Text(text = "Отменить", Modifier.clickable { navController.popBackStack() })
             Text(text = "Контакт")
             Text(text = "Готово", Modifier.clickable {
-                editViewModel.updateContact(contactId)
+                editViewModel.updateContact()
                 navController.popBackStack()
             })
         }

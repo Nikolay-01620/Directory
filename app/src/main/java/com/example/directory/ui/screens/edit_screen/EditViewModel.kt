@@ -35,10 +35,9 @@ class EditViewModel(private val directoryRepository: DirectoryRepository) : View
         _phoneNumber.value = newPhoneNumber
     }
 
-    fun updateContact(contactId: Int) {
+    fun updateContact() {
         viewModelScope.launch {
             val updatedContact = DirectoryDomain(
-                id = contactId,
                 name = _name.value,
                 secondName = _secondName.value,
                 phoneNumber = _phoneNumber.value,
