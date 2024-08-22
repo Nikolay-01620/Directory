@@ -29,11 +29,11 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
     val isButtonEnabled: StateFlow<Boolean> = combine(
         _name,
         _secondName,
-        _phoneNumber
-    ) { name, secondName, phoneNumber ->
+        _phoneNumber,
+        _photoUri
+    ) { name, secondName, phoneNumber, photoUri ->
         name.isNotBlank() || secondName.isNotBlank() || phoneNumber.isNotBlank()
     }.stateIn(viewModelScope, SharingStarted.Lazily, false)
-
 
     fun onNameChange(newName: String) {
         _name.value = newName
@@ -47,10 +47,17 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
         _phoneNumber.value = newPhoneNumber
     }
 
+    fun handleImageSelection(uri: String) {
+        _photoUri.value = uri
+    }
+
     fun addContact() {
         viewModelScope.launch {
-            // Проверяем, что все поля заполнены
-            if (_name.value.isBlank() || _secondName.value.isBlank() || _phoneNumber.value.isBlank()) {
+            if (_name.value.isBlank()
+                && _secondName.value.isBlank()
+                && _phoneNumber.value.isBlank()
+                && _photoUri.value.isBlank()
+            ) {
                 return@launch
             }
             val newContact = DirectoryDomain(
@@ -64,10 +71,6 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
         }
     }
 
-    fun handleImageSelection(uri: String) {
-        _photoUri.value = uri
-    }
-
     fun clearFields() {
         if (_name.value.isNotBlank()) {
             _name.value = ""
@@ -78,6 +81,8 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
         if (_phoneNumber.value.isNotBlank()) {
             _phoneNumber.value = ""
         }
+        if (_photoUri.value.isNotBlank()) {
+            _photoUri.value = ""
+        }
     }
-
 }

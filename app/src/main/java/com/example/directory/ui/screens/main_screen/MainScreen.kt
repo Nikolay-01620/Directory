@@ -17,6 +17,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -119,8 +120,16 @@ fun ContactItem(contact: DirectoryDomain, onClick: () -> Unit) {
                 .clip(CircleShape)
         )
         Spacer(modifier = Modifier.width(16.dp))
-        Text(text = contact.name)
-        Text(text = contact.secondName)
-        Text(text = contact.phoneNumber)
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .padding(start = 8.dp)
+        ) {
+            Text(
+                text = "${contact.name} ${contact.secondName}",
+                style = MaterialTheme.typography.bodyLarge
+            )
+            Text(text = contact.phoneNumber, style = MaterialTheme.typography.titleLarge)
+        }
     }
 }

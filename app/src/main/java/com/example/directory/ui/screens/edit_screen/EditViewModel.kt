@@ -20,7 +20,8 @@ class EditViewModel(private val directoryRepository: DirectoryRepository) : View
     private val _phoneNumber = MutableStateFlow("")
     val phoneNumber: StateFlow<String> = _phoneNumber.asStateFlow()
 
-
+    private val _photoUri = MutableStateFlow("")
+    val photoUri: StateFlow<String> = _photoUri
     fun onNameChange(newName: String) {
         _name.value = newName
     }
@@ -40,7 +41,7 @@ class EditViewModel(private val directoryRepository: DirectoryRepository) : View
                 name = _name.value,
                 secondName = _secondName.value,
                 phoneNumber = _phoneNumber.value,
-                photoUri = ""
+                photoUri = _photoUri.value
             )
             directoryRepository.updateContact(updatedContact)
         }
@@ -59,8 +60,13 @@ class EditViewModel(private val directoryRepository: DirectoryRepository) : View
                 _name.value = it.name
                 _secondName.value = it.secondName
                 _phoneNumber.value = it.phoneNumber
+                _photoUri.value = it.photoUri.toString()
             }
         }
+    }
+
+    fun handleImageSelection(uri: String) {
+        _photoUri.value = uri
     }
 
 }
