@@ -63,4 +63,17 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
         }
     }
 
+    fun clearFields() {
+        if (_name.value.isNotBlank()) {
+            _name.value = ""
+        }
+        if (_secondName.value.isNotBlank()) {
+            _secondName.value = ""
+        }
+        if (_phoneNumber.value.isNotBlank()) {
+            _phoneNumber.value = ""
+        }
+    }
+
+
 }

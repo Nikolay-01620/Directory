@@ -13,6 +13,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -31,12 +32,18 @@ fun AddContactScreen(navController: NavController, addContactViewModel: AddConta
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(
-                    horizontal = 16.dp, vertical = 8.dp
-                ),
-            horizontalArrangement = Arrangement.SpaceBetween
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = "Отменить", Modifier.clickable { navController.popBackStack() })
+            Button(
+                onClick = {
+                    addContactViewModel.clearFields()
+                    navController.popBackStack()
+                },
+            ) {
+                Text(text = "Отменить")
+            }
             Text(text = "Контакт")
             Button(
                 onClick = {
@@ -44,7 +51,6 @@ fun AddContactScreen(navController: NavController, addContactViewModel: AddConta
                     navController.popBackStack()
                 },
                 enabled = isButtonEnabled, // Управление активностью кнопки
-                modifier = Modifier.padding(start = 16.dp)
             ) {
                 Text(text = "Готово")
             }
