@@ -35,16 +35,16 @@ class EditViewModel(private val directoryRepository: DirectoryRepository) : View
         _phoneNumber.value = newPhoneNumber
     }
 
-    fun updateContact() {
+    fun updateContact(contactId: Int) {
         viewModelScope.launch {
             val updatedContact = DirectoryDomain(
+                id = contactId,
                 name = _name.value,
                 secondName = _secondName.value,
                 phoneNumber = _phoneNumber.value,
                 photoUri = ""
             )
-            directoryRepository.updateContact(updatedContact) // Этот метод тоже нужно добавить в репозиторий
-            loadContacts() // обновить список контактов
+            directoryRepository.updateContact(updatedContact)
         }
     }
 
@@ -53,16 +53,9 @@ class EditViewModel(private val directoryRepository: DirectoryRepository) : View
             val contact = directoryRepository.getContactById(contactId)
             contact?.let {
                 _name.value = it.name
+                _secondName.value = it.secondName
                 _phoneNumber.value = it.phoneNumber
             }
-        }
-    }
-
-    private fun loadContacts() {
-        viewModelScope.launch {
-            val contacts =
-                directoryRepository.getAllContacts() // Вы должны реализовать этот метод в репозитории
-            _contacts.value = contacts
         }
     }
 

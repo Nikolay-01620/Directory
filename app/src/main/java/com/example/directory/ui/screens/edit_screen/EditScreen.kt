@@ -27,6 +27,7 @@ fun EditScreen(editViewModel: EditViewModel, navController: NavController, conta
     }
 
     Column {
+
         val name by editViewModel.name.collectAsState()
         val secondName by editViewModel.secondName.collectAsState()
         val phoneNumber by editViewModel.phoneNumber.collectAsState()
@@ -41,7 +42,7 @@ fun EditScreen(editViewModel: EditViewModel, navController: NavController, conta
             Text(text = "Отменить", Modifier.clickable { navController.popBackStack() })
             Text(text = "Контакт")
             Text(text = "Готово", Modifier.clickable {
-                editViewModel.updateContact()
+                editViewModel.updateContact(contactId)
                 navController.popBackStack()
             })
         }
