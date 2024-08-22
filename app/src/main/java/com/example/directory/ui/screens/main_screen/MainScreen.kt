@@ -50,6 +50,7 @@ fun MainScreen(
     val contacts by mainViewModel.contacts.collectAsState()
 
 
+
     LaunchedEffect(Unit) {
         mainViewModel.loadContacts()
     }
@@ -73,7 +74,7 @@ fun MainScreen(
             value = searchQuery,
             onValueChange = {
                 searchQuery = it
-                mainViewModel.onValueSearchChange(it)
+                mainViewModel.searchContacts(it)
             },
             modifier = Modifier
                 .fillMaxWidth()
