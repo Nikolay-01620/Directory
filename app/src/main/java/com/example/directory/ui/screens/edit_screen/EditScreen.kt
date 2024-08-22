@@ -27,7 +27,6 @@ fun EditScreen(editViewModel: EditViewModel, navController: NavController, conta
     }
 
     Column {
-
         val name by editViewModel.name.collectAsState()
         val secondName by editViewModel.secondName.collectAsState()
         val phoneNumber by editViewModel.phoneNumber.collectAsState()

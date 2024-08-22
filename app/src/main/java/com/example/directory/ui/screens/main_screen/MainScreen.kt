@@ -100,9 +100,9 @@ fun ContactItem(contact: DirectoryDomain, onClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp)
+            .padding(horizontal = 20.dp, vertical = 16.dp)
             .clickable { onClick() },
-        horizontalArrangement = Arrangement.Start
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(text = contact.name)
         Text(text = contact.secondName)
