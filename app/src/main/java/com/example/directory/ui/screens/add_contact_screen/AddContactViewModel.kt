@@ -37,6 +37,7 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
 
     fun addContact() {
         viewModelScope.launch {
+
             val newContact = DirectoryDomain(
                 name = _name.value,
                 secondName = _secondName.value,
@@ -47,16 +48,6 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
             _name.value = ""
             _secondName.value = ""
             _phoneNumber.value = ""
-            loadContacts() // обновить список контактов
         }
     }
-
-    private fun loadContacts() {
-        viewModelScope.launch {
-            val contacts =
-                directoryRepository.getAllContacts() // Вы должны реализовать этот метод в репозитории
-            _contacts.value = contacts
-        }
-    }
-
 }

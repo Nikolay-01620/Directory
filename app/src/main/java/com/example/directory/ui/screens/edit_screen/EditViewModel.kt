@@ -11,8 +11,6 @@ import kotlinx.coroutines.launch
 
 class EditViewModel(private val directoryRepository: DirectoryRepository) : ViewModel() {
 
-    private val _contacts = MutableStateFlow<List<DirectoryDomain>>(emptyList())
-
     private val _name = MutableStateFlow("")
     val name: StateFlow<String> = _name.asStateFlow()
 
