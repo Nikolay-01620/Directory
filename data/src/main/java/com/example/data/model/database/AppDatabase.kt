@@ -6,5 +6,5 @@ import com.example.data.model.DirectoryData
 
 @Database(entities = [DirectoryData::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun contactDao(): DirectoryDao
+    abstract fun directoryDao(): DirectoryDao
 }

@@ -28,9 +28,9 @@ fun EditScreen(editViewModel: EditViewModel, navController: NavController, conta
 
     Column {
 
-        val contactName by editViewModel.name.collectAsState()
-        val contactSecondName by editViewModel.secondName.collectAsState()
-        val contactPhoneNumber by editViewModel.phoneNumber.collectAsState()
+        val name by editViewModel.name.collectAsState()
+        val secondName by editViewModel.secondName.collectAsState()
+        val phoneNumber by editViewModel.phoneNumber.collectAsState()
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -51,16 +51,17 @@ fun EditScreen(editViewModel: EditViewModel, navController: NavController, conta
             contentDescription = null
         )
         TextField(
-            value = contactName,
+            value = name,
             onValueChange = editViewModel::onNameChange,
-            placeholder = { Text(text = "Имя") })
+            placeholder = { Text(text = "Имя") }
+        )
         TextField(
-            value = contactSecondName,
+            value = secondName,
             onValueChange = editViewModel::onSecondNameChange,
             placeholder = { Text(text = "Фамилия") }
         )
         TextField(
-            value = contactPhoneNumber,
+            value = phoneNumber,
             onValueChange = editViewModel::onPhoneNumberChange,
             placeholder = { Text(text = "Номер телефона") }
         )

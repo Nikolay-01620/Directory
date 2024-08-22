@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -24,9 +23,9 @@ import com.example.directory.ui.screens.add_contact_screen.AddContactViewModel
 fun AddContactScreen(navController: NavController, addContactViewModel: AddContactViewModel) {
     Column {
 
-        val contactName by addContactViewModel.name.collectAsState()
-        val contactSecondName by addContactViewModel.secondName.collectAsState()
-        val contactPhoneNumber by addContactViewModel.phoneNumber.collectAsState()
+        val name by addContactViewModel.name.collectAsState()
+        val secondName by addContactViewModel.secondName.collectAsState()
+        val phoneNumber by addContactViewModel.phoneNumber.collectAsState()
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -47,16 +46,17 @@ fun AddContactScreen(navController: NavController, addContactViewModel: AddConta
             contentDescription = null
         )
         TextField(
-            value = contactName,
+            value = name,
             onValueChange = addContactViewModel::onNameChange,
-            placeholder = { Text(text = "Имя") })
+            placeholder = { Text(text = "Имя") }
+        )
         TextField(
-            value = contactSecondName,
+            value = secondName,
             onValueChange = addContactViewModel::onSecondNameChange,
             placeholder = { Text(text = "Фамилия") }
         )
         TextField(
-            value = contactPhoneNumber,
+            value = phoneNumber,
             onValueChange = addContactViewModel::onPhoneNumberChange,
             placeholder = { Text(text = "Номер телефона") }
         )

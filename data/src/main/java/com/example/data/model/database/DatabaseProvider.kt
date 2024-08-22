@@ -12,7 +12,7 @@ object DatabaseProvider {
                 if (database == null) {
                     database = Room.databaseBuilder(
                         context.applicationContext,
-                        AppDatabase::class.java, "contacts-database"
+                        AppDatabase::class.java, "directory_database"
                     ).build()
                 }
             }
@@ -20,3 +20,5 @@ object DatabaseProvider {
         return database!!
     }
 }
+
+

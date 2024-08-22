@@ -5,6 +5,10 @@ import com.example.domain.model.DirectoryDomain
 
 
 fun DirectoryDomain.toDomain() = Directory(
-    id = id, name = name, phoneNumber = phoneNumber
+    id = id,
+    name = name,
+    secondName = secondName,
+    phoneNumber = phoneNumber,
+    photoUri = photoUri
 )
 

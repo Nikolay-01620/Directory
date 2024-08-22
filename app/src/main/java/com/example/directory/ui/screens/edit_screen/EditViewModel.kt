@@ -40,7 +40,9 @@ class EditViewModel(private val directoryRepository: DirectoryRepository) : View
             val updatedContact = DirectoryDomain(
                 id = contactId,
                 name = _name.value,
-                phoneNumber = _phoneNumber.value
+                secondName = _secondName.value,
+                phoneNumber = _phoneNumber.value,
+                photoUri = ""
             )
             directoryRepository.updateContact(updatedContact) // Этот метод тоже нужно добавить в репозиторий
             loadContacts() // обновить список контактов

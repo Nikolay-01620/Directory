@@ -101,10 +101,11 @@ fun ContactItem(contact: DirectoryDomain, onClick: () -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
-            .clickable { onClick() }
+            .clickable { onClick() },
+        horizontalArrangement = Arrangement.Start
     ) {
         Text(text = contact.name)
-        Spacer(modifier = Modifier.weight(1f))
+        Text(text = contact.secondName)
         Text(text = contact.phoneNumber)
     }
 }

@@ -13,7 +13,7 @@ val dataModule = module {
     single { DatabaseProvider.getDatabase(get()) }
 
     // Провайдер для DAO
-    single { get<AppDatabase>().contactDao() }
+    single { get<AppDatabase>().directoryDao() }
 
     // Провайдер для репозитория
     single<DirectoryRepository> { DirectoryRepositoryImpl(get()) }

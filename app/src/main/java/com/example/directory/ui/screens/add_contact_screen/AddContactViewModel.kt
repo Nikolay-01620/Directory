@@ -39,7 +39,9 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
         viewModelScope.launch {
             val newContact = DirectoryDomain(
                 name = _name.value,
-                phoneNumber = _phoneNumber.value
+                secondName = _secondName.value,
+                phoneNumber = _phoneNumber.value,
+                photoUri = ""
             )
             directoryRepository.insertContact(newContact)
             loadContacts() // обновить список контактов

@@ -7,5 +7,7 @@ import androidx.room.PrimaryKey
 data class DirectoryData(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val name: String,
+    val secondName: String,
     val phoneNumber: String,
+    val photoUri: String?
 )

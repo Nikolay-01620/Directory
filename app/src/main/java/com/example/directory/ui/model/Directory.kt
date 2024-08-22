@@ -1,7 +1,9 @@
 package com.example.directory.ui.model
 
 data class Directory(
-    val id: Int = 0,
+    val id: Int,
     val name: String,
-    val phoneNumber: String
+    val secondName: String,
+    val phoneNumber: String,
+    val photoUri: String?
 )
