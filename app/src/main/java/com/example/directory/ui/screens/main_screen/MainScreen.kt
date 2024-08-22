@@ -39,7 +39,7 @@ fun MainScreen(
     var searchQuery by remember { mutableStateOf("") }
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
-    val contacts by mainViewModel.searchContacts.collectAsState()
+    val contacts by mainViewModel.contacts.collectAsState()
 
     Column {
         Row(
@@ -78,9 +78,9 @@ fun MainScreen(
         LazyColumn {
             items(contacts) { contact ->
                 ContactItem(
-                    contact,
+                    contact = contact,
                     onClick = {
-                        navController.navigate(route = Route.DetailsScreen.route)
+                        navController.navigate(route = Route.EditScreen.route)
                     },
                 )
             }

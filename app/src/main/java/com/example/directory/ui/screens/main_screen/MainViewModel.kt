@@ -11,8 +11,8 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(private val repository: DirectoryRepository) : ViewModel() {
 
-    private val _searchContacts = MutableStateFlow<List<DirectoryDomain>>(emptyList())
-    val searchContacts: StateFlow<List<DirectoryDomain>> = _searchContacts.asStateFlow()
+    private val _contacts = MutableStateFlow<List<DirectoryDomain>>(emptyList())
+    val contacts: StateFlow<List<DirectoryDomain>> = _contacts.asStateFlow()
 
     private val _name = MutableStateFlow("")
     val name: StateFlow<String> = _name.asStateFlow()
@@ -60,7 +60,7 @@ class MainViewModel(private val repository: DirectoryRepository) : ViewModel() {
         viewModelScope.launch {
             val contacts =
                 repository.getAllContacts() // Вы должны реализовать этот метод в репозитории
-            _searchContacts.value = contacts
+            _contacts.value = contacts
         }
     }
 }
