@@ -80,31 +80,4 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
         }
     }
 
-/*    // Проверка и запрос разрешения
-    private fun checkPermissions() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-            != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), PERMISSION_REQUEST_CODE)
-        }
-    }
-
-
-    private val pickImageRequestCode = 1000
-
-    private fun openGallery() {
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(intent, pickImageRequestCode)
-    }
-
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == pickImageRequestCode && resultCode == Activity.RESULT_OK) {
-            data?.data?.let { uri ->
-                // Теперь у вас есть URI изображения, вы можете использовать его для отображения или сохранения
-                // Например, передать URI в ViewModel
-                addContactViewModel.onPhotoUriChange(uri.toString())
-            }
-        }
-    }*/
 }
