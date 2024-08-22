@@ -11,8 +11,6 @@ import kotlinx.coroutines.launch
 
 class AddContactViewModel(private val directoryRepository: DirectoryRepository) : ViewModel() {
 
-    private val _contacts = MutableStateFlow<List<DirectoryDomain>>(emptyList())
-
     private val _name = MutableStateFlow("")
     val name: StateFlow<String> = _name.asStateFlow()
 
@@ -37,7 +35,10 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
 
     fun addContact() {
         viewModelScope.launch {
-
+            // Проверяем, что все поля заполнены
+            if (_name.value.isBlank() || _secondName.value.isBlank() || _phoneNumber.value.isBlank()) {
+                return@launch
+            }
             val newContact = DirectoryDomain(
                 name = _name.value,
                 secondName = _secondName.value,
@@ -50,4 +51,5 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
             _phoneNumber.value = ""
         }
     }
+
 }
