@@ -17,15 +17,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.directory.R
-import com.example.directory.ui.screens.main_screen.MainViewModel
+import com.example.directory.ui.screens.add_contact_screen.AddContactViewModel
 
 @Composable
-fun AddContactScreen(navController: NavController, mainViewModel: MainViewModel) {
+fun AddContactScreen(navController: NavController, addContactViewModel: AddContactViewModel) {
     Column {
 
-        val contactName by mainViewModel.name.collectAsState()
-        val contactSecondName by mainViewModel.secondName.collectAsState()
-        val contactPhoneNumber by mainViewModel.phoneNumber.collectAsState()
+        val contactName by addContactViewModel.name.collectAsState()
+        val contactSecondName by addContactViewModel.secondName.collectAsState()
+        val contactPhoneNumber by addContactViewModel.phoneNumber.collectAsState()
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -37,7 +37,7 @@ fun AddContactScreen(navController: NavController, mainViewModel: MainViewModel)
             Text(text = "Отменить", Modifier.clickable { navController.popBackStack() })
             Text(text = "Контакт")
             Text(text = "Готово", Modifier.clickable {
-                mainViewModel.addContact()
+                addContactViewModel.addContact()
                 navController.popBackStack()
             })
         }
@@ -47,16 +47,16 @@ fun AddContactScreen(navController: NavController, mainViewModel: MainViewModel)
         )
         TextField(
             value = contactName,
-            onValueChange = mainViewModel::onNameChange,
+            onValueChange = addContactViewModel::onNameChange,
             placeholder = { Text(text = "Имя") })
         TextField(
             value = contactSecondName,
-            onValueChange = mainViewModel::onSecondNameChange,
+            onValueChange = addContactViewModel::onSecondNameChange,
             placeholder = { Text(text = "Фамилия") }
         )
         TextField(
             value = contactPhoneNumber,
-            onValueChange = mainViewModel::onPhoneNumberChange,
+            onValueChange = addContactViewModel::onPhoneNumberChange,
             placeholder = { Text(text = "Номер телефона") }
         )
     }

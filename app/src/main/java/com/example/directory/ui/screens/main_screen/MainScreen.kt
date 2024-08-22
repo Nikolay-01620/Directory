@@ -59,7 +59,7 @@ fun MainScreen(
             value = searchQuery,
             onValueChange = {
                 searchQuery = it
-                mainViewModel.onValueChange(it)
+                mainViewModel.onValueSearchChange(it)
             },
             modifier = Modifier
                 .fillMaxWidth()

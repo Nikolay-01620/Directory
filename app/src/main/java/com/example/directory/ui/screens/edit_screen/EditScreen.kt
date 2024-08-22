@@ -18,20 +18,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.directory.R
-import com.example.directory.ui.screens.main_screen.MainViewModel
 
 @Composable
-fun EditScreen(mainViewModel: MainViewModel, navController: NavController, contactId: Int) {
+fun EditScreen(editViewModel: EditViewModel, navController: NavController, contactId: Int) {
 
     LaunchedEffect(contactId) {
-        mainViewModel.loadContact(contactId)
+        editViewModel.loadContact(contactId)
     }
 
     Column {
 
-        val contactName by mainViewModel.name.collectAsState()
-        val contactSecondName by mainViewModel.secondName.collectAsState()
-        val contactPhoneNumber by mainViewModel.phoneNumber.collectAsState()
+        val contactName by editViewModel.name.collectAsState()
+        val contactSecondName by editViewModel.secondName.collectAsState()
+        val contactPhoneNumber by editViewModel.phoneNumber.collectAsState()
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -43,7 +42,7 @@ fun EditScreen(mainViewModel: MainViewModel, navController: NavController, conta
             Text(text = "Отменить", Modifier.clickable { navController.popBackStack() })
             Text(text = "Контакт")
             Text(text = "Готово", Modifier.clickable {
-                mainViewModel.updateContact(contactId)
+                editViewModel.updateContact(contactId)
                 navController.popBackStack()
             })
         }
@@ -53,16 +52,16 @@ fun EditScreen(mainViewModel: MainViewModel, navController: NavController, conta
         )
         TextField(
             value = contactName,
-            onValueChange = mainViewModel::onNameChange,
+            onValueChange = editViewModel::onNameChange,
             placeholder = { Text(text = "Имя") })
         TextField(
             value = contactSecondName,
-            onValueChange = mainViewModel::onSecondNameChange,
+            onValueChange = editViewModel::onSecondNameChange,
             placeholder = { Text(text = "Фамилия") }
         )
         TextField(
             value = contactPhoneNumber,
-            onValueChange = mainViewModel::onPhoneNumberChange,
+            onValueChange = editViewModel::onPhoneNumberChange,
             placeholder = { Text(text = "Номер телефона") }
         )
     }
