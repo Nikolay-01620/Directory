@@ -21,4 +21,16 @@ class DirectoryRepositoryImpl(private val directoryDao: DirectoryDao) : Director
             directoryDao.getAllContacts().map { it.toDomain() }
         }
     }
+
+    override suspend fun getContactById(contactId: Int): DirectoryDomain? {
+        return withContext(Dispatchers.IO) {
+            directoryDao.getContactById(contactId)?.toDomain()
+        }
+    }
+
+    override suspend fun updateContact(directoryDomain: DirectoryDomain) {
+        return withContext(Dispatchers.IO) {
+            directoryDao.update(directoryDomain.toData())
+        }
+    }
 }

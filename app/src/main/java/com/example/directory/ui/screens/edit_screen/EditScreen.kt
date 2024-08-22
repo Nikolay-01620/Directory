@@ -1,4 +1,4 @@
-package com.example.directory.ui.screens.details_screen
+package com.example.directory.ui.screens.edit_screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -10,9 +10,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -21,7 +21,11 @@ import com.example.directory.R
 import com.example.directory.ui.screens.main_screen.MainViewModel
 
 @Composable
-fun EditScreen(mainViewModel: MainViewModel, navController: NavController) {
+fun EditScreen(mainViewModel: MainViewModel, navController: NavController, contactId: Int) {
+
+    LaunchedEffect(contactId) {
+        mainViewModel.loadContact(contactId)
+    }
 
     Column {
 

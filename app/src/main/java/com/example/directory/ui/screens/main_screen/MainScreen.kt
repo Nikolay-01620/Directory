@@ -80,7 +80,7 @@ fun MainScreen(
                 ContactItem(
                     contact = contact,
                     onClick = {
-                        navController.navigate(route = Route.EditScreen.route)
+                        navController.navigate(route = "${Route.EditScreen.route}/${contact.id}")
                     },
                 )
             }

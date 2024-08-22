@@ -56,6 +56,28 @@ class MainViewModel(private val repository: DirectoryRepository) : ViewModel() {
         }
     }
 
+    fun updateContact(contactId: Int) {
+        viewModelScope.launch {
+            val updatedContact = DirectoryDomain(
+                id = contactId,
+                name = _name.value,
+                phoneNumber = _phoneNumber.value
+            )
+            repository.updateContact(updatedContact) // Этот метод тоже нужно добавить в репозиторий
+            loadContacts() // обновить список контактов
+        }
+    }
+
+    fun loadContact(contactId: Int) {
+        viewModelScope.launch {
+            val contact = repository.getContactById(contactId)
+            contact?.let {
+                _name.value = it.name
+                _phoneNumber.value = it.phoneNumber
+            }
+        }
+    }
+
     private fun loadContacts() {
         viewModelScope.launch {
             val contacts =
