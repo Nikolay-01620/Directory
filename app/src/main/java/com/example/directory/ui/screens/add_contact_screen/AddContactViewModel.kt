@@ -23,6 +23,9 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
     private val _phoneNumber = MutableStateFlow("")
     val phoneNumber: StateFlow<String> = _phoneNumber.asStateFlow()
 
+    private val _photoUri = MutableStateFlow("")
+    val photoUri: StateFlow<String> = _photoUri
+
     val isButtonEnabled: StateFlow<Boolean> = combine(
         _name,
         _secondName,
@@ -54,11 +57,15 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
                 name = _name.value,
                 secondName = _secondName.value,
                 phoneNumber = _phoneNumber.value,
-                photoUri = ""
+                photoUri = _photoUri.value
             )
             directoryRepository.insertContact(newContact)
             clearFields()
         }
+    }
+
+    fun handleImageSelection(uri: String) {
+        _photoUri.value = uri
     }
 
     fun clearFields() {
@@ -73,5 +80,31 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
         }
     }
 
+/*    // Проверка и запрос разрешения
+    private fun checkPermissions() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), PERMISSION_REQUEST_CODE)
+        }
+    }
 
+
+    private val pickImageRequestCode = 1000
+
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(intent, pickImageRequestCode)
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == pickImageRequestCode && resultCode == Activity.RESULT_OK) {
+            data?.data?.let { uri ->
+                // Теперь у вас есть URI изображения, вы можете использовать его для отображения или сохранения
+                // Например, передать URI в ViewModel
+                addContactViewModel.onPhotoUriChange(uri.toString())
+            }
+        }
+    }*/
 }
