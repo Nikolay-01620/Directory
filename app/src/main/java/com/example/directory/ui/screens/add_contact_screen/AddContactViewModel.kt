@@ -43,6 +43,9 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
             )
             directoryRepository.insertContact(newContact)
             loadContacts() // обновить список контактов
+            _name.value = ""
+            _secondName.value = ""
+            _phoneNumber.value = ""
         }
     }
 
