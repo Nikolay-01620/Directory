@@ -19,7 +19,6 @@ fun AddContactScreen(navController: NavController, addContactViewModel: AddConta
         secondName = secondName,
         phoneNumber = phoneNumber,
         photoUri = photoUri,
-        handleImageSelection = addContactViewModel::handleImageSelection,
         onNameChange = addContactViewModel::onNameChange,
         onSecondNameChange = addContactViewModel::onSecondNameChange,
         onPhoneNumberChange = addContactViewModel::onPhoneNumberChange,

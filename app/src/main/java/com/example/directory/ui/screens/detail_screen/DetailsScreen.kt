@@ -1,5 +1,7 @@
 package com.example.directory.ui.screens.detail_screen
 
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -12,36 +14,53 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
+import coil.compose.AsyncImage
 import com.example.directory.R
 import com.example.directory.ui.nav_host.Route
 import com.example.directory.ui.screens.main_screen.MainViewModel
+import com.example.directory.utils.SquareImageFrame
 
 @Composable
 fun DetailsScreen(
     navController: NavController,
-    viewModel: MainViewModel,
+    detailsViewModel: DetailsViewModel,
     contactId: Int
 ) {
 
-    val contacts by viewModel.contacts.collectAsState()
-    val contact = viewModel.contacts.collectAsState().value.find { it.id == contactId }
+    LaunchedEffect(contactId) {
+        detailsViewModel.loadContact(contactId)
+    }
+
+
+    val contact = detailsViewModel.contacts.collectAsState().value.find { it.id == contactId }
+
+    val name by detailsViewModel.name.collectAsState()
+    val secondName by detailsViewModel.secondName.collectAsState()
+    val phoneNumber by detailsViewModel.phoneNumber.collectAsState()
+    val photoUri by detailsViewModel.photoUri.collectAsState()
+
+    val imagePickerLauncher =
+        rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            uri?.let { detailsViewModel.handleImageSelection(it.toString()) }
+        }
 
     Column(modifier = Modifier) {
         Row(
@@ -60,16 +79,17 @@ fun DetailsScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
             ) {
-                Image(
-                    modifier = Modifier.size(50.dp),
-                    painter = painterResource(id = R.drawable.image_phone),
-                    contentDescription = null
-                )
-                Text(modifier = Modifier.padding(top = 10.dp, end = 4.dp), text = "Витя")
+                SquareImageFrame(photoUri = photoUri)
+                Text(modifier = Modifier.padding(top = 10.dp, end = 4.dp), text = name)
+                Text(modifier = Modifier.padding(top = 10.dp, end = 4.dp), text = secondName)
             }
             Text(
                 modifier = Modifier
-                    .clickable { navController.navigate("${Route.EditScreen.route}/${contact}") },
+                    .clickable {
+                        if (contact != null) {
+                            navController.navigate("${Route.EditScreen.route}/${contact.id}")
+                        }
+                    },
                 text = "Править",
                 style = MaterialTheme.typography.titleLarge
             )
@@ -80,7 +100,7 @@ fun DetailsScreen(
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             BorderedText(text = "Написать", modifier = Modifier.width(85.dp))
-            BorderedText(text = "Сотовый", modifier = Modifier.width(85.dp))
+            BorderedText(text = phoneNumber, modifier = Modifier.width(85.dp))
             BorderedText(text = "Видео", modifier = Modifier.width(85.dp))
             BorderedText(text = "Почта", modifier = Modifier.width(85.dp))
         }

@@ -9,6 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.example.directory.ui.nav_host.NavHost
 import com.example.directory.ui.screens.add_contact_screen.AddContactViewModel
+import com.example.directory.ui.screens.detail_screen.DetailsViewModel
 import com.example.directory.ui.screens.edit_screen.EditViewModel
 import com.example.directory.ui.screens.main_screen.MainViewModel
 import com.example.directory.ui.theme.DirectoryTheme
@@ -19,6 +20,7 @@ class MainActivity : ComponentActivity() {
     private val mainViewModel: MainViewModel by inject()
     private val addContactViewModel: AddContactViewModel by inject()
     private val editViewModel: EditViewModel by inject()
+    private val detailsViewModel: DetailsViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +33,8 @@ class MainActivity : ComponentActivity() {
                     NavHost(
                         mainViewModel = mainViewModel,
                         addContactViewModel = addContactViewModel,
-                        editViewModel = editViewModel
+                        editViewModel = editViewModel,
+                        detailsViewModel = detailsViewModel
                     )
                 }
             }

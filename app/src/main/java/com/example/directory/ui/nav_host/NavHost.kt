@@ -11,6 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.navArgument
 import com.example.directory.ui.screens.add_contact_screen.AddContactViewModel
 import com.example.directory.ui.screens.detail_screen.DetailsScreen
+import com.example.directory.ui.screens.detail_screen.DetailsViewModel
 import com.example.directory.ui.screens.edit_screen.EditScreen
 import com.example.directory.ui.screens.edit_screen.EditViewModel
 import com.example.directory.ui.screens.main_screen.MainViewModel
@@ -20,7 +21,8 @@ fun NavHost(
     navController: NavHostController = rememberNavController(),
     mainViewModel: MainViewModel,
     addContactViewModel: AddContactViewModel,
-    editViewModel: EditViewModel
+    editViewModel: EditViewModel,
+    detailsViewModel: DetailsViewModel
 ) {
     NavHost(
         navController = navController, startDestination = Route.MainScreen.route
@@ -55,7 +57,7 @@ fun NavHost(
             contactId?.let {
                 DetailsScreen(
                     navController = navController,
-                    viewModel = mainViewModel,
+                    detailsViewModel = detailsViewModel,
                     contactId = contactId
                 )
             }
