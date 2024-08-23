@@ -2,10 +2,14 @@ package com.example.directory.utils
 
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -16,6 +20,8 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -63,17 +69,25 @@ fun DetailsScreen(
                 Text(text = "Готово")
             }
         }
-        AsyncImage(
-            model = photoUri,
-            contentDescription = null,
-            placeholder = painterResource(id = R.drawable.ic_launcher_background), // Добавьте свой placeholder
+        Box(
             modifier = Modifier
-                .size(100.dp)
-                .clip(CircleShape)
+                .size(100.dp) // Размер контейнера
+                .clip(CircleShape) // Форма контейнера
+                .background(Color.LightGray) // Цвет фона рамки
+                .border(2.dp, Color.DarkGray, CircleShape) // Рамка
                 .clickable {
                     imagePickerLauncher.launch("image/*") // Запуск выбора изображения
                 }
-        )
+        ) {
+            AsyncImage(
+                model = photoUri,
+                contentDescription = null,
+                placeholder = painterResource(id = R.drawable.image_phone), // Замените на ваш placeholder
+                contentScale = ContentScale.Crop, // Пропорциональное изменение размера изображения
+                modifier = Modifier
+                    .fillMaxSize() // Заполняет весь контейнер
+            )
+        }
         TextField(
             value = name,
             onValueChange = { onNameChange(it) },
