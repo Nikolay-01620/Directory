@@ -53,6 +53,8 @@ class EditViewModel(private val directoryRepository: DirectoryRepository) : View
         }
     }
 
+
+    // загрузка данных для редактирования
     fun loadContact(contactId: Int) {
         viewModelScope.launch {
             val contact = directoryRepository.getContactById(contactId)

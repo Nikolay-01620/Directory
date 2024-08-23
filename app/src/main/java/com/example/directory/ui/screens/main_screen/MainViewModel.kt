@@ -20,14 +20,21 @@ class MainViewModel(private val directoryRepository: DirectoryRepository) : View
         loadContacts()
     }
 
+    /** Когда приложение запускается, оно должно загрузить
+    все контакты из какого-то источника данных, например,
+    из базы данных, сети или файла. Функция loadContacts()
+    делает именно это — она загружает все контакты через
+    directoryRepository.getAllContacts().*/
     fun loadContacts() {
         viewModelScope.launch {
             val contacts = directoryRepository.getAllContacts()
+            /** После загрузки все контакты сохраняются в переменной
+            allContacts. Эта переменная используется как исходный
+            список контактов, по которому происходит фильтрация при поиске.*/
             allContacts = contacts
             _contacts.value = contacts
         }
     }
-
     fun searchContacts(
         /** Функция принимает поисковую строку query,
         которую вводит пользователь. */
@@ -36,7 +43,7 @@ class MainViewModel(private val directoryRepository: DirectoryRepository) : View
         /** Если query пустая строка,
         функция возвращает пустой список,
         так как нет смысла искать что-то без
-        указания конкретного запроса. */
+        указания конкретного запроса.*/
         if (query.isEmpty()) {
             _contacts.value = allContacts
 
