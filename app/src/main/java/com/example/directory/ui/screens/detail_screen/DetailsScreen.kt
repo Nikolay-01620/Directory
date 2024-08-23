@@ -96,7 +96,7 @@ fun DetailsScreen(
                 modifier = Modifier
                     .clickable {
                         if (contact != null) {
-                            navController.navigate("${Route.EditScreen.route}/${contact.id}")
+                            navController.navigate(route = Route.EditScreen.route)
                         }
                     },
                 text = "Править",
