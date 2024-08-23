@@ -48,7 +48,7 @@ fun NavHost(
             }
         }
         composable(Route.DetailsScreen.route) {
-            DetailsScreen(navController)
+            DetailsScreen(navController = navController, viewModel = mainViewModel)
         }
     }
 }
