@@ -47,8 +47,18 @@ fun NavHost(
                 )
             }
         }
-        composable(Route.DetailsScreen.route) {
-            DetailsScreen(navController = navController, viewModel = mainViewModel)
+        composable(
+            route = "${Route.DetailsScreen.route}/{contactId}",
+            arguments = listOf(navArgument("contactId") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val contactId = backStackEntry.arguments?.getInt("contactId")
+            contactId?.let {
+                DetailsScreen(
+                    navController = navController,
+                    viewModel = mainViewModel,
+                    contactId = contactId
+                )
+            }
         }
     }
 }

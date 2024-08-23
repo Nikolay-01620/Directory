@@ -36,10 +36,12 @@ import com.example.directory.ui.screens.main_screen.MainViewModel
 @Composable
 fun DetailsScreen(
     navController: NavController,
-    viewModel: MainViewModel
+    viewModel: MainViewModel,
+    contactId: Int
 ) {
 
-    val contact by viewModel.contacts.collectAsState()
+    val contacts by viewModel.contacts.collectAsState()
+    val contact = viewModel.contacts.collectAsState().value.find { it.id == contactId }
 
     Column(modifier = Modifier) {
         Row(
