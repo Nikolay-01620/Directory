@@ -18,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.directory.R
@@ -33,9 +32,9 @@ fun DetailsScreen(
     onNameChange: (String) -> Unit,
     onSecondNameChange: (String) -> Unit,
     onPhoneNumberChange: (String) -> Unit,
-    onValueDone: () -> Unit,
+    onValueChangeDone: () -> Unit,
     isButtonEnabled: Boolean,
-    navController: NavController
+    navController: NavController,
 ) {
 
     Column {
@@ -56,7 +55,7 @@ fun DetailsScreen(
             Text(text = "Контакт")
             Button(
                 onClick = {
-                    onValueDone()
+                    onValueChangeDone()
                     navController.popBackStack()
                 },
                 enabled = isButtonEnabled, // Управление активностью кнопки

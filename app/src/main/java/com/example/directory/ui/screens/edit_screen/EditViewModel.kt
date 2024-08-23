@@ -5,8 +5,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.domain.model.DirectoryDomain
 import com.example.domain.repositories.DirectoryRepository
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class EditViewModel(private val directoryRepository: DirectoryRepository) : ViewModel() {
@@ -22,6 +25,15 @@ class EditViewModel(private val directoryRepository: DirectoryRepository) : View
 
     private val _photoUri = MutableStateFlow("")
     val photoUri: StateFlow<String> = _photoUri
+
+    val isButtonEnabled: StateFlow<Boolean> = combine(
+        _name,
+        _secondName,
+        _phoneNumber,
+        _photoUri
+    ) { name, secondName, phoneNumber, photoUri ->
+        name.isNotBlank() || secondName.isNotBlank() || phoneNumber.isNotBlank()
+    }.stateIn(viewModelScope, SharingStarted.Lazily, false)
     fun onNameChange(newName: String) {
         _name.value = newName
     }

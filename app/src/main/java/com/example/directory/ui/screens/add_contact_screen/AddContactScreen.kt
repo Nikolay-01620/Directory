@@ -1,5 +1,3 @@
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -25,7 +23,7 @@ fun AddContactScreen(navController: NavController, addContactViewModel: AddConta
         onNameChange = addContactViewModel::onNameChange,
         onSecondNameChange = addContactViewModel::onSecondNameChange,
         onPhoneNumberChange = addContactViewModel::onPhoneNumberChange,
-        onValueDone = addContactViewModel::addContact,
+        onValueChangeDone = addContactViewModel::addContact,
         navController = navController,
         isButtonEnabled = isButtonEnabled
     )

@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.directory.R
+import com.example.directory.utils.DetailsScreen
 
 @Composable
 fun EditScreen(editViewModel: EditViewModel, navController: NavController, contactId: Int) {
@@ -95,3 +96,34 @@ fun EditScreen(editViewModel: EditViewModel, navController: NavController, conta
     }
 
 }
+
+/*
+@Composable
+fun EditScreen(editViewModel: EditViewModel, navController: NavController, contactId: Int) {
+
+    LaunchedEffect(contactId) {
+        editViewModel.loadContact(contactId)
+    }
+
+    val name by editViewModel.name.collectAsState()
+    val secondName by editViewModel.secondName.collectAsState()
+    val phoneNumber by editViewModel.phoneNumber.collectAsState()
+    val photoUri by editViewModel.photoUri.collectAsState()
+    val isButtonEnabled by editViewModel.isButtonEnabled.collectAsState()
+
+
+    DetailsScreen(
+        name = name,
+        secondName = secondName,
+        phoneNumber = phoneNumber,
+        photoUri = photoUri,
+        handleImageSelection = editViewModel::handleImageSelection,
+        onNameChange = editViewModel::onNameChange,
+        onSecondNameChange = editViewModel::onSecondNameChange,
+        onPhoneNumberChange = editViewModel::onPhoneNumberChange,
+        onValueChangeDone = editViewModel::updateContact(),
+        navController = navController,
+        isButtonEnabled = isButtonEnabled
+    )
+
+}*/
