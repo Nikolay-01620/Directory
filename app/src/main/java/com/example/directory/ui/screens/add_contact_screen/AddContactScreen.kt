@@ -1,3 +1,5 @@
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -14,19 +16,17 @@ fun AddContactScreen(navController: NavController, addContactViewModel: AddConta
     val photoUri by addContactViewModel.photoUri.collectAsState()
     val isButtonEnabled by addContactViewModel.isButtonEnabled.collectAsState()
 
-
     DetailsScreen(
         name = name,
         secondName = secondName,
         phoneNumber = phoneNumber,
         photoUri = photoUri,
-        handleImageSelection = { addContactViewModel.handleImageSelection() },
-        onNameChange = { addContactViewModel.onNameChange() },
-        onSecondNameChange = { addContactViewModel.onNameChange() },
-        onPhoneNumberChange = { addContactViewModel.onNameChange() },
-        onValueDone = { addContactViewModel.addContact() },
-        navController = navController
+        handleImageSelection = addContactViewModel::handleImageSelection,
+        onNameChange = addContactViewModel::onNameChange,
+        onSecondNameChange = addContactViewModel::onSecondNameChange,
+        onPhoneNumberChange = addContactViewModel::onPhoneNumberChange,
+        onValueDone = addContactViewModel::addContact,
+        navController = navController,
+        isButtonEnabled = isButtonEnabled
     )
-
-
 }

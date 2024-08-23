@@ -71,7 +71,7 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
         }
     }
 
-    fun clearFields() {
+    private fun clearFields() {
         if (_name.value.isNotBlank()) {
             _name.value = ""
         }

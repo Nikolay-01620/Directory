@@ -29,11 +29,12 @@ fun DetailsScreen(
     secondName: String,
     phoneNumber: String,
     photoUri: String,
-    handleImageSelection: () -> Unit,
-    onNameChange: () -> Unit,
-    onSecondNameChange: () -> Unit,
-    onPhoneNumberChange: () -> Unit,
+    handleImageSelection: (String) -> Unit,
+    onNameChange: (String) -> Unit,
+    onSecondNameChange: (String) -> Unit,
+    onPhoneNumberChange: (String) -> Unit,
     onValueDone: () -> Unit,
+    isButtonEnabled: Boolean,
     navController: NavController
 ) {
 
@@ -41,7 +42,7 @@ fun DetailsScreen(
 
         val imagePickerLauncher =
             rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-                uri?.let { handleImageSelection() }
+                uri?.let { handleImageSelection(it.toString()) }
             }
         Row(
             modifier = Modifier
@@ -53,10 +54,15 @@ fun DetailsScreen(
         ) {
             Text(text = "Отменить", Modifier.clickable { navController.popBackStack() })
             Text(text = "Контакт")
-            Text(text = "Готово", Modifier.clickable {
-                onValueDone()
-                navController.popBackStack()
-            })
+            Button(
+                onClick = {
+                    onValueDone()
+                    navController.popBackStack()
+                },
+                enabled = isButtonEnabled, // Управление активностью кнопки
+            ) {
+                Text(text = "Готово")
+            }
         }
         AsyncImage(
             model = photoUri,
@@ -71,17 +77,17 @@ fun DetailsScreen(
         )
         TextField(
             value = name,
-            onValueChange = { onNameChange() },
+            onValueChange = { onNameChange(it) },
             placeholder = { Text(text = "Имя") }
         )
         TextField(
             value = secondName,
-            onValueChange = { onSecondNameChange() },
+            onValueChange = { onSecondNameChange(it) },
             placeholder = { Text(text = "Фамилия") }
         )
         TextField(
             value = phoneNumber,
-            onValueChange = { onPhoneNumberChange() },
+            onValueChange = { onPhoneNumberChange(it) },
             placeholder = { Text(text = "Номер телефона") }
         )
     }
