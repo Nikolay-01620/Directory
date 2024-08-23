@@ -8,11 +8,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,7 +34,7 @@ import com.example.directory.ui.nav_host.Route
 @Composable
 fun DetailsScreen(navController: NavController = rememberNavController()) {
 
-    Column() {
+    Column(modifier = Modifier) {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
@@ -68,29 +70,91 @@ fun DetailsScreen(navController: NavController = rememberNavController()) {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            BorderedText(text = "Написать")
-            BorderedText(text = "Сотовый")
-            BorderedText(text = "Видео")
-            BorderedText(text = "Почта")
+            BorderedText(text = "Написать", modifier = Modifier.width(85.dp))
+            BorderedText(text = "Сотовый", modifier = Modifier.width(85.dp))
+            BorderedText(text = "Видео", modifier = Modifier.width(85.dp))
+            BorderedText(text = "Почта", modifier = Modifier.width(85.dp))
         }
+        Spacer(modifier = Modifier.padding(top = 18.dp))
+
+        // Первый нижний бордер с высотой в 2 раза больше
+        BorderedText(
+            text = "Большой бордер 1",
+            modifier = Modifier
+                .fillMaxWidth() // Растягивается на всю ширину
+                .height(50.dp)
+                .padding(horizontal = 10.dp)
+        )
+
+        Spacer(modifier = Modifier.padding(top = 18.dp))
+
+        // Второй нижний бордер с высотой в 4 раза больше
+        BorderedText(
+            text = "Большой бордер 2",
+            modifier = Modifier
+                .fillMaxWidth() // Растягивается на всю ширину
+                .height(100.dp) // Высота как четыре обычных бордера
+                .padding(horizontal = 10.dp)
+        )
+        Spacer(modifier = Modifier.padding(top = 18.dp))
+        Border()
     }
 }
 
 @Composable
-fun BorderedText(text: String) {
+fun BorderedText(text: String, modifier: Modifier = Modifier) {
     Text(
         text = text,
         style = MaterialTheme.typography.bodyMedium,
         textAlign = TextAlign.Center,
-        modifier = Modifier
+        modifier = modifier
             .border(
                 width = 2.dp,
                 color = Color.Gray,
                 shape = RoundedCornerShape(8.dp) // Закругленные углы (можно изменить на другую форму)
             )
-            .width(85.dp)
             .padding(10.dp) // Отступы внутри рамки
     )
+}
+
+@Composable
+fun Border() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 10.dp)
+            .border(
+                width = 2.dp,
+                color = Color.Gray,
+                shape = RoundedCornerShape(8.dp)
+            )
+    ) {
+        Text(
+            text = "Строка 1",
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Divider(color = Color.Gray, thickness = 2.dp) // Красная линия разделения
+
+        Text(
+            text = "Строка 2",
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Divider(color = Color.Gray, thickness = 2.dp) // Зеленая линия разделения
+
+        Text(
+            text = "Строка 3",
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            style = MaterialTheme.typography.bodyMedium
+        )
+    }
 }
 
 
