@@ -3,7 +3,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavController
 import com.example.directory.ui.screens.add_contact_screen.AddContactViewModel
-import com.example.directory.utils.DetailsScreen
+import com.example.directory.utils.LayoutScreen
 
 @Composable
 fun AddContactScreen(navController: NavController, addContactViewModel: AddContactViewModel) {
@@ -14,7 +14,7 @@ fun AddContactScreen(navController: NavController, addContactViewModel: AddConta
     val photoUri by addContactViewModel.photoUri.collectAsState()
     val isButtonEnabled by addContactViewModel.isButtonEnabled.collectAsState()
 
-    DetailsScreen(
+    LayoutScreen(
         name = name,
         secondName = secondName,
         phoneNumber = phoneNumber,

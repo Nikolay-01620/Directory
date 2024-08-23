@@ -2,15 +2,10 @@ package com.example.directory.ui.screens.edit_screen
 
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -25,14 +20,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.directory.R
-import com.example.directory.utils.DetailsScreen
 
 @Composable
 fun EditScreen(editViewModel: EditViewModel, navController: NavController, contactId: Int) {
@@ -47,7 +39,8 @@ fun EditScreen(editViewModel: EditViewModel, navController: NavController, conta
     val photoUri by editViewModel.photoUri.collectAsState()
 
     Column(
-        modifier = Modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+
     ) {
 
 
@@ -70,44 +63,43 @@ fun EditScreen(editViewModel: EditViewModel, navController: NavController, conta
                 navController.popBackStack()
             })
         }
-        Box(
+        AsyncImage(
+            model = photoUri,
+            contentDescription = null,
+            placeholder = painterResource(id = R.drawable.baseline_portrait_24), // Добавьте свой placeholder
             modifier = Modifier
-                .size(100.dp) // Размер контейнера
-                .clip(CircleShape) // Форма контейнера
-                .background(Color.LightGray) // Цвет фона рамки
-                .border(2.dp, Color.DarkGray, CircleShape) // Рамка
+                .size(100.dp)
+                .clip(CircleShape)
                 .clickable {
                     imagePickerLauncher.launch("image/*") // Запуск выбора изображения
                 }
-        ) {
-            AsyncImage(
-                model = photoUri,
-                contentDescription = null,
-                placeholder = painterResource(id = R.drawable.image_phone), // Замените на ваш placeholder
-                contentScale = ContentScale.Crop, // Пропорциональное изменение размера изображения
-                modifier = Modifier
-                    .fillMaxSize() // Заполняет весь контейнер
-            )
-        }
+        )
         TextField(
+            modifier = Modifier.fillMaxWidth(),
             value = name,
             onValueChange = editViewModel::onNameChange,
             placeholder = { Text(text = "Имя") }
         )
         TextField(
+            modifier = Modifier.fillMaxWidth(),
+
             value = secondName,
             onValueChange = editViewModel::onSecondNameChange,
             placeholder = { Text(text = "Фамилия") }
         )
         TextField(
+            modifier = Modifier.fillMaxWidth(),
+
             value = phoneNumber,
             onValueChange = editViewModel::onPhoneNumberChange,
             placeholder = { Text(text = "Номер телефона") }
         )
-        Button(onClick = {
-            editViewModel.deleteContact(contactId)
-            navController.popBackStack()
-        }) {
+        Button(
+            modifier = Modifier.fillMaxWidth(),
+            onClick = {
+                editViewModel.deleteContact(contactId)
+                navController.popBackStack()
+            }) {
             Text(text = "Удалить контакт")
         }
     }

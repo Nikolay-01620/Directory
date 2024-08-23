@@ -46,7 +46,12 @@ fun NavHost(
                 )
             }
         }
-
+        composable(Route.DetailsScreen.route) {
+            AddContactScreen(
+                navController = navController,
+                addContactViewModel = addContactViewModel
+            )
+        }
     }
 }
 
