@@ -27,11 +27,11 @@ import coil.compose.AsyncImage
 import com.example.directory.R
 
 @Composable
-fun EditScreen(editViewModel: EditViewModel, navController: NavController) {
+fun EditScreen(editViewModel: EditViewModel, navController: NavController, contactId: Int) {
 
-  /*  LaunchedEffect(contactId) {
+    LaunchedEffect(contactId) {
         editViewModel.loadContact(contactId)
-    }*/
+    }
 
     val name by editViewModel.name.collectAsState()
     val secondName by editViewModel.secondName.collectAsState()
@@ -59,7 +59,7 @@ fun EditScreen(editViewModel: EditViewModel, navController: NavController) {
             Text(text = "Отменить", Modifier.clickable { navController.popBackStack() })
             Text(text = "Контакт")
             Text(text = "Готово", Modifier.clickable {
-                //editViewModel.updateContact(contactId)
+                editViewModel.updateContact(contactId)
                 navController.popBackStack()
             })
         }
@@ -97,7 +97,7 @@ fun EditScreen(editViewModel: EditViewModel, navController: NavController) {
         Button(
             modifier = Modifier.fillMaxWidth(),
             onClick = {
-               // editViewModel.deleteContact(contactId)
+                editViewModel.deleteContact(contactId)
                 navController.popBackStack()
             }) {
             Text(text = "Удалить контакт")

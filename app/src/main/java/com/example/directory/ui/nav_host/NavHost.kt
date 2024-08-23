@@ -37,13 +37,17 @@ fun NavHost(
             )
         }
         composable(
-            route = Route.EditScreen.route,
-        ) {
-            EditScreen(
-                navController = navController,
-                editViewModel = editViewModel,
-                //contactId = it
-            )
+            route = "${Route.EditScreen.route}/{contactId}",
+            arguments = listOf(navArgument("contactId") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val contactId = backStackEntry.arguments?.getInt("contactId")
+            contactId?.let {
+                EditScreen(
+                    navController = navController,
+                    editViewModel = editViewModel,
+                    contactId = it
+                )
+            }
         }
         composable(
             route = "${Route.DetailsScreen.route}/{contactId}",
@@ -59,20 +63,5 @@ fun NavHost(
             }
         }
     }
-    /*composable(
-        route = "${Route.EditScreen.route}/{contactId}",
-        arguments = listOf(navArgument("contactId") { type = NavType.IntType })
-    ) { backStackEntry ->
-        val contactId = backStackEntry.arguments?.getInt("contactId")
-        contactId?.let {
-            EditScreen(
-                navController = navController,
-                editViewModel = editViewModel,
-                contactId = it
-            )
-        }
-    }*/
-
 }
-
 
