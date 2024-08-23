@@ -36,7 +36,6 @@ import coil.compose.AsyncImage
 import com.example.directory.R
 import com.example.directory.ui.nav_host.Route
 import com.example.directory.ui.screens.main_screen.MainViewModel
-import com.example.directory.utils.SquareImageFrame
 
 @Composable
 fun DetailsScreen(
@@ -79,7 +78,17 @@ fun DetailsScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
             ) {
-                SquareImageFrame(photoUri = photoUri)
+                AsyncImage(
+                    model = photoUri,
+                    contentDescription = null,
+                    placeholder = painterResource(id = R.drawable.baseline_portrait_24), // Добавьте свой placeholder
+                    modifier = Modifier
+                        .size(100.dp)
+                        .clip(CircleShape)
+                        .clickable {
+                            imagePickerLauncher.launch("image/*") // Запуск выбора изображения
+                        }
+                )
                 Text(modifier = Modifier.padding(top = 10.dp, end = 4.dp), text = name)
                 Text(modifier = Modifier.padding(top = 10.dp, end = 4.dp), text = secondName)
             }

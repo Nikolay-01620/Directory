@@ -79,6 +79,8 @@ class EditViewModel(private val directoryRepository: DirectoryRepository) : View
         }
     }
 
-
+    fun handleImageSelection(uri: String) {
+        _photoUri.value = uri
+    }
 
 }

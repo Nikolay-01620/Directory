@@ -25,7 +25,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.directory.R
-import com.example.directory.utils.SquareImageFrame
 
 @Composable
 fun EditScreen(editViewModel: EditViewModel, navController: NavController, contactId: Int) {
@@ -44,6 +43,11 @@ fun EditScreen(editViewModel: EditViewModel, navController: NavController, conta
 
     ) {
 
+
+        val imagePickerLauncher =
+            rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+                uri?.let { editViewModel.handleImageSelection(it.toString()) }
+            }
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -59,7 +63,17 @@ fun EditScreen(editViewModel: EditViewModel, navController: NavController, conta
                 navController.popBackStack()
             })
         }
-        SquareImageFrame(photoUri = photoUri)
+        AsyncImage(
+            model = photoUri,
+            contentDescription = null,
+            placeholder = painterResource(id = R.drawable.baseline_portrait_24), // Добавьте свой placeholder
+            modifier = Modifier
+                .size(100.dp)
+                .clip(CircleShape)
+                .clickable {
+                    imagePickerLauncher.launch("image/*") // Запуск выбора изображения
+                }
+        )
         TextField(
             modifier = Modifier.fillMaxWidth(),
             value = name,
