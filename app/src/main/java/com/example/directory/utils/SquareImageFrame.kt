@@ -25,9 +25,9 @@ import com.example.directory.ui.screens.detail_screen.DetailsViewModel
 @Composable
 fun SquareImageFrame(
     photoUri: String?,
-    modifier: Modifier = Modifier,
-    viewModel: DetailsViewModel = viewModel()
+    modifier: Modifier = Modifier
 ) {
+    val viewModel: DetailsViewModel = viewModel()
     val imagePickerLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
             uri?.let { viewModel.handleImageSelection(it.toString()) }
