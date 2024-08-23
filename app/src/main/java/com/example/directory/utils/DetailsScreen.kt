@@ -14,9 +14,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
@@ -28,9 +25,15 @@ import com.example.directory.R
 
 @Composable
 fun DetailsScreen(
-    viewModel: ViewModel,
-    value: String,
-    onClick: () -> Unit,
+    name: String,
+    secondName: String,
+    phoneNumber: String,
+    photoUri: String,
+    handleImageSelection: () -> Unit,
+    onNameChange: () -> Unit,
+    onSecondNameChange: () -> Unit,
+    onPhoneNumberChange: () -> Unit,
+    onValueDone: () -> Unit,
     navController: NavController
 ) {
 
@@ -38,7 +41,7 @@ fun DetailsScreen(
 
         val imagePickerLauncher =
             rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-                uri?.let { onClick() }
+                uri?.let { handleImageSelection() }
             }
         Row(
             modifier = Modifier
@@ -50,10 +53,13 @@ fun DetailsScreen(
         ) {
             Text(text = "Отменить", Modifier.clickable { navController.popBackStack() })
             Text(text = "Контакт")
-            Text(text = "Готово", Modifier.clickable { onClick() })
+            Text(text = "Готово", Modifier.clickable {
+                onValueDone()
+                navController.popBackStack()
+            })
         }
         AsyncImage(
-            model = viewModel,
+            model = photoUri,
             contentDescription = null,
             placeholder = painterResource(id = R.drawable.ic_launcher_background), // Добавьте свой placeholder
             modifier = Modifier
@@ -64,23 +70,19 @@ fun DetailsScreen(
                 }
         )
         TextField(
-            value = value,
-            onValueChange = { onClick() },
+            value = name,
+            onValueChange = { onNameChange() },
             placeholder = { Text(text = "Имя") }
         )
         TextField(
-            value = value,
-            onValueChange = { (onClick()) },
+            value = secondName,
+            onValueChange = { onSecondNameChange() },
             placeholder = { Text(text = "Фамилия") }
         )
         TextField(
-            value = value,
-            onValueChange = { onClick() },
+            value = phoneNumber,
+            onValueChange = { onPhoneNumberChange() },
             placeholder = { Text(text = "Номер телефона") }
         )
-        Button(onClick = { onClick() }) {
-            Text(text = "Удалить контакт")
-        }
     }
-
 }
