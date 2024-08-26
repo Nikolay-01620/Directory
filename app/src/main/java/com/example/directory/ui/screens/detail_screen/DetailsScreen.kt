@@ -43,10 +43,9 @@ fun DetailsScreen(
     contactId: Int
 ) {
 
-   /* LaunchedEffect(contactId) {
+    LaunchedEffect(contactId) {
         detailsViewModel.loadContact(contactId)
     }
-*/
 
     val contacts by detailsViewModel.contacts.collectAsState()
 
