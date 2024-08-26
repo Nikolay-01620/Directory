@@ -24,6 +24,7 @@ fun AddContactScreen(navController: NavController, addContactViewModel: AddConta
         onPhoneNumberChange = addContactViewModel::onPhoneNumberChange,
         onValueChangeDone = addContactViewModel::addContact,
         navController = navController,
-        isButtonEnabled = isButtonEnabled
+        isButtonEnabled = isButtonEnabled,
+        handleImageSelection = addContactViewModel::handleImageSelection
     )
 }

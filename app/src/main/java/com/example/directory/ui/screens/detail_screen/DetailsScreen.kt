@@ -64,7 +64,7 @@ fun DetailsScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
             ) {
-                ImagePicker(photoUri = photoUri)
+                ImagePicker(photoUri = photoUri, detailsViewModel::handleImageSelection)
                 Text(modifier = Modifier.padding(top = 10.dp, end = 4.dp), text = name)
                 Text(modifier = Modifier.padding(top = 10.dp, end = 4.dp), text = secondName)
             }

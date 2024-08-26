@@ -20,11 +20,9 @@ import com.example.directory.R
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-private val _photoUri = MutableStateFlow("")
-val photoUri: StateFlow<String> = _photoUri
 
 @Composable
-fun ImagePicker(photoUri: String) {
+fun ImagePicker(photoUri: String, handleImageSelection: (String) -> Unit) {
 
     val imagePickerLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
@@ -40,14 +38,11 @@ fun ImagePicker(photoUri: String) {
             .size(80.dp)
             .clip(CircleShape)
             .clickable {
-                Log.d("ImagePicker","Нажатие")
-                imagePickerLauncher.launch("image/*") }
+                Log.d("ImagePicker", "Нажатие")
+                imagePickerLauncher.launch("image/*")
+            }
             .background(color = Color.Gray) // Цвет фона
             .clip(RoundedCornerShape(16.dp))
     )
 
-}
-
-fun handleImageSelection(uri: String) {
-    _photoUri.value = uri
 }

@@ -74,7 +74,7 @@ class EditViewModel(private val directoryRepository: DirectoryRepository) : View
                 _name.value = it.name
                 _secondName.value = it.secondName
                 _phoneNumber.value = it.phoneNumber
-                _photoUri.value = it.photoUri.toString()
+                _photoUri.value = it.photoUri
             }
         }
     }

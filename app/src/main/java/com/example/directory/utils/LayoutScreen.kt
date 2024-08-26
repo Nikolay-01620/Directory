@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -27,6 +28,7 @@ fun LayoutScreen(
     onValueChangeDone: () -> Unit,
     isButtonEnabled: Boolean,
     navController: NavController,
+    handleImageSelection: (String) -> Unit
 ) {
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -51,7 +53,8 @@ fun LayoutScreen(
                 Text(text = "Готово")
             }
         }
-        ImagePicker(photoUri = photoUri)
+        ImagePicker(photoUri = photoUri, handleImageSelection)
+        Spacer(modifier = Modifier.padding(top = 10.dp))
         TextField(
             modifier = Modifier
                 .fillMaxWidth(),

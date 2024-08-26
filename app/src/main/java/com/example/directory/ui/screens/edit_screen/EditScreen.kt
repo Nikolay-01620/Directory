@@ -39,7 +39,8 @@ fun EditScreen(editViewModel: EditViewModel, navController: NavController, conta
             onPhoneNumberChange = editViewModel::onPhoneNumberChange,
             onValueChangeDone = { editViewModel.updateContact(contactId) },
             navController = navController,
-            isButtonEnabled = isButtonEnabled
+            isButtonEnabled = isButtonEnabled,
+            handleImageSelection = editViewModel::handleImageSelection
         )
         Button(modifier = Modifier.fillMaxWidth(),
             onClick = {
