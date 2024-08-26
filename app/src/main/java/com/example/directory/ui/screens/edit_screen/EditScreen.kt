@@ -1,12 +1,15 @@
 package com.example.directory.ui.screens.edit_screen
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.example.directory.ui.nav_host.Route
 import com.example.directory.utils.LayoutScreen
@@ -25,7 +28,7 @@ fun EditScreen(editViewModel: EditViewModel, navController: NavController, conta
     val isButtonEnabled by editViewModel.isButtonEnabled.collectAsState()
 
 
-    Column {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
         LayoutScreen(
             name = name,
             secondName = secondName,
@@ -38,10 +41,11 @@ fun EditScreen(editViewModel: EditViewModel, navController: NavController, conta
             navController = navController,
             isButtonEnabled = isButtonEnabled
         )
-        Button(onClick = {
-            editViewModel.deleteContact(contactId)
-            navController.navigate(Route.MainScreen.route)
-        }) {
+        Button(modifier = Modifier.fillMaxWidth(),
+            onClick = {
+                editViewModel.deleteContact(contactId)
+                navController.navigate(Route.MainScreen.route)
+            }) {
             Text(text = "Delete contact")
         }
     }
