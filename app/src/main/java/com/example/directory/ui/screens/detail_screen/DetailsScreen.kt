@@ -1,11 +1,12 @@
 package com.example.directory.ui.screens.detail_screen
 
-import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -27,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -78,15 +80,16 @@ fun DetailsScreen(
                 modifier = Modifier
             ) {
                 AsyncImage(
+                    placeholder = painterResource(id = R.drawable.baseline_portrait_24),
                     model = photoUri,
                     contentDescription = null,
-                    placeholder = painterResource(id = R.drawable.baseline_portrait_24), // Добавьте свой placeholder
+                    contentScale = ContentScale.Crop,// Добавьте свой placeholder
                     modifier = Modifier
-                        .size(100.dp)
+                        .size(80.dp)
                         .clip(CircleShape)
-                        .clickable {
-                            imagePickerLauncher.launch("image/*") // Запуск выбора изображения
-                        }
+                        .clickable { imagePickerLauncher.launch("image/*") }
+                        .background(color = Color.Gray) // Цвет фона
+                        .clip(RoundedCornerShape(16.dp))
                 )
                 Text(modifier = Modifier.padding(top = 10.dp, end = 4.dp), text = name)
                 Text(modifier = Modifier.padding(top = 10.dp, end = 4.dp), text = secondName)
