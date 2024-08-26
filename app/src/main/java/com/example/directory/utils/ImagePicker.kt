@@ -1,5 +1,6 @@
 package com.example.directory.utils
 
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
@@ -38,7 +39,9 @@ fun ImagePicker(photoUri: String) {
         modifier = Modifier
             .size(80.dp)
             .clip(CircleShape)
-            .clickable { imagePickerLauncher.launch("image/*") }
+            .clickable {
+                Log.d("ImagePicker","Нажатие")
+                imagePickerLauncher.launch("image/*") }
             .background(color = Color.Gray) // Цвет фона
             .clip(RoundedCornerShape(16.dp))
     )
