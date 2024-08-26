@@ -1,8 +1,8 @@
 package com.example.directory.ui.screens.detail_screen
 
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -35,7 +35,6 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.directory.R
 import com.example.directory.ui.nav_host.Route
-import com.example.directory.ui.screens.main_screen.MainViewModel
 
 @Composable
 fun DetailsScreen(
@@ -44,12 +43,13 @@ fun DetailsScreen(
     contactId: Int
 ) {
 
-    LaunchedEffect(contactId) {
+   /* LaunchedEffect(contactId) {
         detailsViewModel.loadContact(contactId)
     }
+*/
 
+    val contacts by detailsViewModel.contacts.collectAsState()
 
-    val contact = detailsViewModel.contacts.collectAsState().value.find { it.id == contactId }
 
     val name by detailsViewModel.name.collectAsState()
     val secondName by detailsViewModel.secondName.collectAsState()
@@ -95,9 +95,7 @@ fun DetailsScreen(
             Text(
                 modifier = Modifier
                     .clickable {
-                        if (contact != null) {
-                            navController.navigate("${Route.EditScreen.route}/${contact.id}")
-                        }
+                        navController.navigate("${Route.EditScreen.route}/${contacts?.id}")
                     },
                 text = "Править",
                 style = MaterialTheme.typography.titleLarge

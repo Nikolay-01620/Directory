@@ -11,8 +11,8 @@ import kotlinx.coroutines.launch
 
 class DetailsViewModel(private val directoryRepository: DirectoryRepository) : ViewModel() {
 
-    private val _contacts = MutableStateFlow<List<DirectoryDomain>>(emptyList())
-    val contacts: StateFlow<List<DirectoryDomain>> = _contacts.asStateFlow()
+    private val _contacts = MutableStateFlow<DirectoryDomain?>(null)
+    val contacts: StateFlow<DirectoryDomain?> = _contacts.asStateFlow()
 
     private val _name = MutableStateFlow("")
     val name: StateFlow<String> = _name.asStateFlow()
@@ -46,6 +46,7 @@ class DetailsViewModel(private val directoryRepository: DirectoryRepository) : V
         viewModelScope.launch {
             val contact = directoryRepository.getContactById(contactId)
             contact?.let {
+                _contacts.value = it
                 _name.value = it.name
                 _secondName.value = it.secondName
                 _phoneNumber.value = it.phoneNumber
@@ -53,5 +54,4 @@ class DetailsViewModel(private val directoryRepository: DirectoryRepository) : V
             }
         }
     }
-
 }
