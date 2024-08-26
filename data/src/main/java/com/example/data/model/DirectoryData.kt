@@ -9,5 +9,5 @@ data class DirectoryData(
     val name: String,
     val secondName: String,
     val phoneNumber: String,
-    val photoUri: String?
+    val photoUri: String
 )

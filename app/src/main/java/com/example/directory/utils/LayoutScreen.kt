@@ -1,35 +1,18 @@
 package com.example.directory.utils
 
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import coil.compose.AsyncImage
-import com.example.directory.R
 
 @Composable
 fun LayoutScreen(
@@ -37,7 +20,6 @@ fun LayoutScreen(
     secondName: String,
     phoneNumber: String,
     photoUri: String,
-    handleImageSelection: (String) -> Unit,
     onNameChange: (String) -> Unit,
     onSecondNameChange: (String) -> Unit,
     onPhoneNumberChange: (String) -> Unit,
@@ -48,10 +30,6 @@ fun LayoutScreen(
 
     Column {
 
-        val imagePickerLauncher =
-            rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-                uri?.let { handleImageSelection(it.toString()) }
-            }
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -72,29 +50,24 @@ fun LayoutScreen(
                 Text(text = "Готово")
             }
         }
-        AsyncImage(
-            placeholder = painterResource(id = R.drawable.baseline_portrait_24),
-            model = photoUri,
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .size(80.dp)
-                .clip(CircleShape)
-                .clickable { imagePickerLauncher.launch("image/*") }
-                .background(color = Color.Gray) // Цвет фона
-                .clip(RoundedCornerShape(16.dp))
-        )
+        ImagePicker(photoUri = photoUri)
         TextField(
+            modifier = Modifier
+                .fillMaxWidth(),
             value = name,
             onValueChange = { onNameChange(it) },
             placeholder = { Text(text = "Имя") }
         )
         TextField(
+            modifier = Modifier
+                .fillMaxWidth(),
             value = secondName,
             onValueChange = { onSecondNameChange(it) },
             placeholder = { Text(text = "Фамилия") }
         )
         TextField(
+            modifier = Modifier
+                .fillMaxWidth(),
             value = phoneNumber,
             onValueChange = { onPhoneNumberChange(it) },
             placeholder = { Text(text = "Номер телефона") }
