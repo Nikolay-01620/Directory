@@ -29,23 +29,6 @@ class DetailsViewModel(private val directoryRepository: DirectoryRepository) : V
     private val _mail = MutableStateFlow("")
     val mail: StateFlow<String> = _mail
 
-    fun onNameChange(newName: String) {
-        _name.value = newName
-    }
-
-    fun onSecondNameChange(newSecondName: String) {
-        _secondName.value = newSecondName
-    }
-
-    fun onPhoneNumberChange(newPhoneNumber: String) {
-        _phoneNumber.value = newPhoneNumber
-    }
-
-    fun onMailChange(newMail: String) {
-        _mail.value = newMail
-    }
-
-
     fun handleImageSelection(uri: String) {
         _photoUri.value = uri
     }
@@ -58,7 +41,8 @@ class DetailsViewModel(private val directoryRepository: DirectoryRepository) : V
                 _name.value = it.name
                 _secondName.value = it.secondName
                 _phoneNumber.value = it.phoneNumber
-                _photoUri.value = it.photoUri.toString()
+                _photoUri.value = it.photoUri
+                _mail.value = it.mail
             }
         }
     }

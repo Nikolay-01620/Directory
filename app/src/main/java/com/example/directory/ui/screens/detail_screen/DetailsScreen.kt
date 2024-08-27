@@ -91,22 +91,20 @@ fun DetailsScreen(
         }
         Spacer(modifier = Modifier.padding(top = 18.dp))
 
-        // Первый нижний бордер с высотой в 2 раза больше
         BorderedText(
             text = phoneNumber,
             modifier = Modifier
-                .fillMaxWidth() // Растягивается на всю ширину
+                .fillMaxWidth()
                 .height(50.dp)
                 .padding(horizontal = 10.dp)
         )
 
         Spacer(modifier = Modifier.padding(top = 18.dp))
 
-        // Второй нижний бордер с высотой в 4 раза больше
         BorderedText(
             text = mail,
             modifier = Modifier
-                .fillMaxWidth() // Растягивается на всю ширину
+                .fillMaxWidth()
                 .height(50.dp) // Высота как четыре обычных бордера
                 .padding(horizontal = 10.dp)
                 .align(Alignment.Start)
