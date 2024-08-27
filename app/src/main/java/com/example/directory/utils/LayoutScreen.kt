@@ -22,9 +22,11 @@ fun LayoutScreen(
     secondName: String,
     phoneNumber: String,
     photoUri: String,
+    mail: String,
     onNameChange: (String) -> Unit,
     onSecondNameChange: (String) -> Unit,
     onPhoneNumberChange: (String) -> Unit,
+    onMailChange: (String) -> Unit,
     onValueChangeDone: () -> Unit,
     isButtonEnabled: Boolean,
     navController: NavController,
@@ -75,6 +77,13 @@ fun LayoutScreen(
             value = phoneNumber,
             onValueChange = { onPhoneNumberChange(it) },
             placeholder = { Text(text = "Номер телефона") }
+        )
+        TextField(
+            modifier = Modifier
+                .fillMaxWidth(),
+            value = mail,
+            onValueChange = { onMailChange(it) },
+            placeholder = { Text(text = "Почта") }
         )
     }
 }

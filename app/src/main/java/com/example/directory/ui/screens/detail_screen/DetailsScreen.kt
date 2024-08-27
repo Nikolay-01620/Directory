@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.AbsoluteAlignment
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -46,6 +47,7 @@ fun DetailsScreen(
     val secondName by detailsViewModel.secondName.collectAsState()
     val phoneNumber by detailsViewModel.phoneNumber.collectAsState()
     val photoUri by detailsViewModel.photoUri.collectAsState()
+    val mail by detailsViewModel.mail.collectAsState()
 
     Column(modifier = Modifier) {
         Row(
@@ -83,7 +85,7 @@ fun DetailsScreen(
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             BorderedText(text = "Написать", modifier = Modifier.width(85.dp))
-            BorderedText(text = phoneNumber, modifier = Modifier.width(85.dp))
+            BorderedText(text = "Вызов", modifier = Modifier.width(85.dp))
             BorderedText(text = "Видео", modifier = Modifier.width(85.dp))
             BorderedText(text = "Почта", modifier = Modifier.width(85.dp))
         }
@@ -91,7 +93,7 @@ fun DetailsScreen(
 
         // Первый нижний бордер с высотой в 2 раза больше
         BorderedText(
-            text = "Большой бордер 1",
+            text = phoneNumber,
             modifier = Modifier
                 .fillMaxWidth() // Растягивается на всю ширину
                 .height(50.dp)
@@ -102,11 +104,12 @@ fun DetailsScreen(
 
         // Второй нижний бордер с высотой в 4 раза больше
         BorderedText(
-            text = "Большой бордер 2",
+            text = mail,
             modifier = Modifier
                 .fillMaxWidth() // Растягивается на всю ширину
-                .height(100.dp) // Высота как четыре обычных бордера
+                .height(50.dp) // Высота как четыре обычных бордера
                 .padding(horizontal = 10.dp)
+                .align(Alignment.Start)
         )
         Spacer(modifier = Modifier.padding(top = 18.dp))
         Border()
@@ -125,7 +128,8 @@ fun BorderedText(text: String, modifier: Modifier = Modifier) {
                 color = Color.Gray,
                 shape = RoundedCornerShape(8.dp) // Закругленные углы (можно изменить на другую форму)
             )
-            .padding(10.dp) // Отступы внутри рамки
+            .padding(10.dp),
+        // Отступы внутри рамки
     )
 }
 

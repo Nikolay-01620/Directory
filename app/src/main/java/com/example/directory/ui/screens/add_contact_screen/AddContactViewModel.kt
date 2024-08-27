@@ -26,6 +26,9 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
     private val _photoUri = MutableStateFlow("")
     val photoUri: StateFlow<String> = _photoUri
 
+    private val _mail = MutableStateFlow("")
+    val mail: StateFlow<String> = _mail
+
     val isButtonEnabled: StateFlow<Boolean> = combine(
         _name,
         _secondName,
@@ -47,6 +50,10 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
         _phoneNumber.value = newPhoneNumber
     }
 
+    fun onMailChange(newMail: String) {
+        _mail.value = newMail
+    }
+
     fun handleImageSelection(uri: String) {
         _photoUri.value = uri
     }
@@ -57,6 +64,7 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
                 && _secondName.value.isBlank()
                 && _phoneNumber.value.isBlank()
                 && _photoUri.value.isBlank()
+                && _mail.value.isBlank()
             ) {
                 return@launch
             }
@@ -64,7 +72,8 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
                 name = _name.value,
                 secondName = _secondName.value,
                 phoneNumber = _phoneNumber.value,
-                photoUri = _photoUri.value
+                photoUri = _photoUri.value,
+                mail = _mail.value
             )
             directoryRepository.insertContact(newContact)
             clearFields()
@@ -83,6 +92,9 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
         }
         if (_photoUri.value.isNotBlank()) {
             _photoUri.value = ""
+        }
+        if (_mail.value.isNotBlank()) {
+            _mail.value = ""
         }
     }
 }

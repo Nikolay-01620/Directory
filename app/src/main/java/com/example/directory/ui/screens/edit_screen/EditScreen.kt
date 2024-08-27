@@ -26,6 +26,8 @@ fun EditScreen(editViewModel: EditViewModel, navController: NavController, conta
     val phoneNumber by editViewModel.phoneNumber.collectAsState()
     val photoUri by editViewModel.photoUri.collectAsState()
     val isButtonEnabled by editViewModel.isButtonEnabled.collectAsState()
+    val mail by editViewModel.mail.collectAsState()
+
 
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -34,13 +36,15 @@ fun EditScreen(editViewModel: EditViewModel, navController: NavController, conta
             secondName = secondName,
             phoneNumber = phoneNumber,
             photoUri = photoUri,
+            mail = mail,
             onNameChange = editViewModel::onNameChange,
             onSecondNameChange = editViewModel::onSecondNameChange,
             onPhoneNumberChange = editViewModel::onPhoneNumberChange,
             onValueChangeDone = { editViewModel.updateContact(contactId) },
             navController = navController,
             isButtonEnabled = isButtonEnabled,
-            handleImageSelection = editViewModel::handleImageSelection
+            handleImageSelection = editViewModel::handleImageSelection,
+            onMailChange = editViewModel::onMailChange
         )
         Button(modifier = Modifier.fillMaxWidth(),
             onClick = {

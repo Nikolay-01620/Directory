@@ -9,6 +9,7 @@ fun DirectoryDomain.toDomain() = Directory(
     name = name,
     secondName = secondName,
     phoneNumber = phoneNumber,
-    photoUri = photoUri
+    photoUri = photoUri,
+    mail = mail
 )
 

@@ -26,6 +26,9 @@ class DetailsViewModel(private val directoryRepository: DirectoryRepository) : V
     private val _photoUri = MutableStateFlow("")
     val photoUri: StateFlow<String> = _photoUri
 
+    private val _mail = MutableStateFlow("")
+    val mail: StateFlow<String> = _mail
+
     fun onNameChange(newName: String) {
         _name.value = newName
     }
@@ -37,6 +40,11 @@ class DetailsViewModel(private val directoryRepository: DirectoryRepository) : V
     fun onPhoneNumberChange(newPhoneNumber: String) {
         _phoneNumber.value = newPhoneNumber
     }
+
+    fun onMailChange(newMail: String) {
+        _mail.value = newMail
+    }
+
 
     fun handleImageSelection(uri: String) {
         _photoUri.value = uri

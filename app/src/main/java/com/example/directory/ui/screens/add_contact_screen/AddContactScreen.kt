@@ -13,18 +13,22 @@ fun AddContactScreen(navController: NavController, addContactViewModel: AddConta
     val phoneNumber by addContactViewModel.phoneNumber.collectAsState()
     val photoUri by addContactViewModel.photoUri.collectAsState()
     val isButtonEnabled by addContactViewModel.isButtonEnabled.collectAsState()
+    val mail by addContactViewModel.mail.collectAsState()
+
 
     LayoutScreen(
         name = name,
         secondName = secondName,
         phoneNumber = phoneNumber,
         photoUri = photoUri,
+        mail = mail,
         onNameChange = addContactViewModel::onNameChange,
         onSecondNameChange = addContactViewModel::onSecondNameChange,
         onPhoneNumberChange = addContactViewModel::onPhoneNumberChange,
         onValueChangeDone = addContactViewModel::addContact,
         navController = navController,
         isButtonEnabled = isButtonEnabled,
-        handleImageSelection = addContactViewModel::handleImageSelection
+        handleImageSelection = addContactViewModel::handleImageSelection,
+        onMailChange = addContactViewModel::onMailChange
     )
 }

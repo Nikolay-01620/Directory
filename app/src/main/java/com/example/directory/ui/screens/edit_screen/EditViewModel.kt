@@ -26,6 +26,9 @@ class EditViewModel(private val directoryRepository: DirectoryRepository) : View
     private val _photoUri = MutableStateFlow("")
     val photoUri: StateFlow<String> = _photoUri
 
+    private val _mail = MutableStateFlow("")
+    val mail: StateFlow<String> = _mail
+
     val isButtonEnabled: StateFlow<Boolean> = combine(
         _name,
         _secondName,
@@ -34,6 +37,7 @@ class EditViewModel(private val directoryRepository: DirectoryRepository) : View
     ) { name, secondName, phoneNumber, photoUri ->
         name.isNotBlank() || secondName.isNotBlank() || phoneNumber.isNotBlank()
     }.stateIn(viewModelScope, SharingStarted.Lazily, false)
+
     fun onNameChange(newName: String) {
         _name.value = newName
     }
@@ -46,6 +50,10 @@ class EditViewModel(private val directoryRepository: DirectoryRepository) : View
         _phoneNumber.value = newPhoneNumber
     }
 
+    fun onMailChange(newMail: String) {
+        _mail.value = newMail
+    }
+
     fun updateContact(contactId: Int) {
         viewModelScope.launch {
             val updatedContact = DirectoryDomain(
@@ -53,7 +61,8 @@ class EditViewModel(private val directoryRepository: DirectoryRepository) : View
                 name = _name.value,
                 secondName = _secondName.value,
                 phoneNumber = _phoneNumber.value,
-                photoUri = _photoUri.value
+                photoUri = _photoUri.value,
+                mail = _mail.value
             )
             directoryRepository.updateContact(updatedContact)
         }
@@ -65,7 +74,6 @@ class EditViewModel(private val directoryRepository: DirectoryRepository) : View
         }
     }
 
-
     // загрузка данных для редактирования
     fun loadContact(contactId: Int) {
         viewModelScope.launch {
@@ -75,6 +83,7 @@ class EditViewModel(private val directoryRepository: DirectoryRepository) : View
                 _secondName.value = it.secondName
                 _phoneNumber.value = it.phoneNumber
                 _photoUri.value = it.photoUri
+                _mail.value = it.mail
             }
         }
     }
@@ -82,5 +91,4 @@ class EditViewModel(private val directoryRepository: DirectoryRepository) : View
     fun handleImageSelection(uri: String) {
         _photoUri.value = uri
     }
-
 }

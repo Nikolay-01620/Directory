@@ -8,7 +8,8 @@ fun DirectoryDomain.toData() = DirectoryData(
     name = name,
     secondName = secondName,
     phoneNumber = phoneNumber,
-    photoUri = photoUri
+    photoUri = photoUri,
+    mail = mail
 )
 
 fun DirectoryData.toDomain() = DirectoryDomain(
@@ -16,5 +17,6 @@ fun DirectoryData.toDomain() = DirectoryDomain(
     name = name,
     secondName = secondName,
     phoneNumber = phoneNumber,
-    photoUri = photoUri
+    photoUri = photoUri,
+    mail = mail
 )
