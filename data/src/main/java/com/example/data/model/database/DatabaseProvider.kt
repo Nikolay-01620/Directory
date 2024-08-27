@@ -12,7 +12,7 @@ object DatabaseProvider {
                 if (database == null) {
                     database = Room.databaseBuilder(
                         context.applicationContext,
-                        AppDatabase::class.java, "directory_database2"
+                        AppDatabase::class.java, "directory_database3"
                     ).build()
                 }
             }

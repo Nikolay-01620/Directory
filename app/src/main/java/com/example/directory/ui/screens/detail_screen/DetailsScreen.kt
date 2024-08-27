@@ -1,5 +1,10 @@
 package com.example.directory.ui.screens.detail_screen
 
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -11,6 +16,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -18,10 +24,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.AbsoluteAlignment
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -48,6 +54,7 @@ fun DetailsScreen(
     val phoneNumber by detailsViewModel.phoneNumber.collectAsState()
     val photoUri by detailsViewModel.photoUri.collectAsState()
     val mail by detailsViewModel.mail.collectAsState()
+    val context = LocalContext.current
 
     Column(modifier = Modifier) {
         Row(
@@ -84,10 +91,31 @@ fun DetailsScreen(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            BorderedText(text = "Написать", modifier = Modifier.width(85.dp))
+            BorderedText(
+                text = "Написать",
+                modifier = Modifier
+                    .width(85.dp)
+                    .clickable {
+                        val smsIntent = Intent(Intent.ACTION_SENDTO).apply {
+                            data = Uri.parse("smsto:${phoneNumber}") // Замените phoneNumber на нужный номер телефона
+                        }
+                        context.startActivity(smsIntent)
+                    }
+            )
+
             BorderedText(text = "Вызов", modifier = Modifier.width(85.dp))
             BorderedText(text = "Видео", modifier = Modifier.width(85.dp))
-            BorderedText(text = "Почта", modifier = Modifier.width(85.dp))
+            BorderedText(
+                text = "Почта",
+                modifier = Modifier
+                    .width(85.dp)
+                    .clickable {
+                        val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+                            data = Uri.parse("mailto:${mail}")
+                        }
+                        context.startActivity(emailIntent)
+                    }
+            )
         }
         Spacer(modifier = Modifier.padding(top = 18.dp))
 
@@ -170,7 +198,6 @@ fun Border() {
         )
     }
 }
-
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
