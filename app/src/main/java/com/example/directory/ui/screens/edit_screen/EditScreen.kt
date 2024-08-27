@@ -45,7 +45,7 @@ fun EditScreen(editViewModel: EditViewModel, navController: NavController, conta
             isButtonEnabled = isButtonEnabled,
             handleImageSelection = editViewModel::handleImageSelection,
             onMailChange = editViewModel::onMailChange,
-            cancel = editViewModel::clearFields
+            cancel = editViewModel::fakeClearFields
 
         )
         Button(modifier = Modifier.fillMaxWidth(),
