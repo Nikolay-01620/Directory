@@ -29,6 +29,7 @@ fun AddContactScreen(navController: NavController, addContactViewModel: AddConta
         navController = navController,
         isButtonEnabled = isButtonEnabled,
         handleImageSelection = addContactViewModel::handleImageSelection,
-        onMailChange = addContactViewModel::onMailChange
+        onMailChange = addContactViewModel::onMailChange,
+        cancel = addContactViewModel::clearFields
     )
 }

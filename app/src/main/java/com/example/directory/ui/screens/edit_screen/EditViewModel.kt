@@ -91,4 +91,22 @@ class EditViewModel(private val directoryRepository: DirectoryRepository) : View
     fun handleImageSelection(uri: String) {
         _photoUri.value = uri
     }
+
+    fun clearFields() {
+        if (_name.value.isNotBlank()) {
+            _name.value = ""
+        }
+        if (_secondName.value.isNotBlank()) {
+            _secondName.value = ""
+        }
+        if (_phoneNumber.value.isNotBlank()) {
+            _phoneNumber.value = ""
+        }
+        if (_photoUri.value.isNotBlank()) {
+            _photoUri.value = ""
+        }
+        if (_mail.value.isNotBlank()) {
+            _mail.value = ""
+        }
+    }
 }
