@@ -82,8 +82,8 @@ dependencies {
     //Navigation
     implementation("androidx.navigation:navigation-compose:2.7.7")
 
-    //Coil
-    implementation("io.coil-kt:coil-compose:2.4.0")
+    //coil
+    implementation ("com.github.skydoves:landscapist-coil:2.2.8")
 
     implementation(project(":domain"))
     implementation(project(":data"))

@@ -1,5 +1,6 @@
 package com.example.directory.ui.screens.main_screen
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.DirectoryDomain
@@ -33,8 +34,10 @@ class MainViewModel(private val directoryRepository: DirectoryRepository) : View
             список контактов, по которому происходит фильтрация при поиске.*/
             allContacts = contacts
             _contacts.value = contacts
+            Log.d("MainScreen", contacts.toString())
         }
     }
+
     fun searchContacts(
         /** Функция принимает поисковую строку query,
         которую вводит пользователь. */

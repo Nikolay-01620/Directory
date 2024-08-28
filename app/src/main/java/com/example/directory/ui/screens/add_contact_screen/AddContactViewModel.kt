@@ -23,11 +23,11 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
     private val _phoneNumber = MutableStateFlow("")
     val phoneNumber: StateFlow<String> = _phoneNumber.asStateFlow()
 
-    private val _photoUri = MutableStateFlow("")
-    val photoUri: StateFlow<String> = _photoUri
+    private val _photoUri = MutableStateFlow<ByteArray?>(null)
+    val photoUri: StateFlow<ByteArray?> = _photoUri.asStateFlow()
 
     private val _mail = MutableStateFlow("")
-    val mail: StateFlow<String> = _mail
+    val mail: StateFlow<String> = _mail.asStateFlow()
 
     val isButtonEnabled: StateFlow<Boolean> = combine(
         _name,
@@ -54,7 +54,7 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
         _mail.value = newMail
     }
 
-    fun handleImageSelection(uri: String) {
+    fun handleImageSelection(uri: ByteArray) {
         _photoUri.value = uri
     }
 
@@ -63,8 +63,8 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
             if (_name.value.isBlank()
                 && _secondName.value.isBlank()
                 && _phoneNumber.value.isBlank()
-                && _photoUri.value.isBlank()
                 && _mail.value.isBlank()
+                && _photoUri.value?.isEmpty() ?: true
             ) {
                 return@launch
             }
@@ -72,14 +72,15 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
                 name = _name.value,
                 secondName = _secondName.value,
                 phoneNumber = _phoneNumber.value,
-                photoUri = _photoUri.value,
+                photoUri = _photoUri.value.toString(),
                 mail = _mail.value
             )
             directoryRepository.insertContact(newContact)
             clearFields()
         }
     }
-     fun clearFields() {
+
+    fun clearFields() {
         if (_name.value.isNotBlank()) {
             _name.value = ""
         }
@@ -89,8 +90,8 @@ class AddContactViewModel(private val directoryRepository: DirectoryRepository) 
         if (_phoneNumber.value.isNotBlank()) {
             _phoneNumber.value = ""
         }
-        if (_photoUri.value.isNotBlank()) {
-            _photoUri.value = ""
+        if (_photoUri.value?.isNotEmpty() == true) {
+            _photoUri.value = null
         }
         if (_mail.value.isNotBlank()) {
             _mail.value = ""

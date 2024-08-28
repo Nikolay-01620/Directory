@@ -23,13 +23,13 @@ class DetailsViewModel(private val directoryRepository: DirectoryRepository) : V
     private val _phoneNumber = MutableStateFlow("")
     val phoneNumber: StateFlow<String> = _phoneNumber.asStateFlow()
 
-    private val _photoUri = MutableStateFlow("")
-    val photoUri: StateFlow<String> = _photoUri
+    private val _photoUri = MutableStateFlow<ByteArray?>(null)
+    val photoUri: StateFlow<ByteArray?> = _photoUri.asStateFlow()
 
     private val _mail = MutableStateFlow("")
-    val mail: StateFlow<String> = _mail
+    val mail: StateFlow<String> = _mail.asStateFlow()
 
-    fun handleImageSelection(uri: String) {
+    fun handleImageSelection(uri: ByteArray) {
         _photoUri.value = uri
     }
 
@@ -41,7 +41,7 @@ class DetailsViewModel(private val directoryRepository: DirectoryRepository) : V
                 _name.value = it.name
                 _secondName.value = it.secondName
                 _phoneNumber.value = it.phoneNumber
-                _photoUri.value = it.photoUri
+                _photoUri.value = it.photoUri.toByteArray()
                 _mail.value = it.mail
             }
         }

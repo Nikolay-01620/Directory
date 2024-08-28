@@ -35,9 +35,9 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import coil.compose.AsyncImage
 import com.example.directory.ui.nav_host.Route
 import com.example.domain.model.DirectoryDomain
+import com.skydoves.landscapist.coil.CoilImage
 
 @Composable
 fun MainScreen(
@@ -113,9 +113,8 @@ fun ContactItem(contact: DirectoryDomain, onClick: () -> Unit) {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        AsyncImage(
-            model = contact.photoUri,
-            contentDescription = null,
+        CoilImage(
+            imageModel = { contact.photoUri },
             modifier = Modifier
                 .size(50.dp)
                 .clip(CircleShape)

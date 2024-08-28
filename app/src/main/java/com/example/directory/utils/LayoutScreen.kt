@@ -32,7 +32,7 @@ fun LayoutScreen(
     name: String,
     secondName: String,
     phoneNumber: String,
-    photoUri: String,
+    photoUri: ByteArray?,
     mail: String,
     onNameChange: (String) -> Unit,
     onSecondNameChange: (String) -> Unit,
@@ -41,7 +41,7 @@ fun LayoutScreen(
     onValueChangeDone: () -> Unit,
     isButtonEnabled: Boolean,
     navController: NavController,
-    handleImageSelection: (String) -> Unit,
+    handleImageSelection: (ByteArray) -> Unit,
     cancel: () -> Unit
 ) {
 
@@ -86,7 +86,7 @@ fun LayoutScreen(
             Spacer(modifier = Modifier.padding(top = 10.dp))
             ImagePicker(
                 photoUri = photoUri,
-                handleImageSelection,
+                handleImageSelection = handleImageSelection,
                 modifier = Modifier
             )
             Spacer(modifier = Modifier.padding(top = 10.dp))
